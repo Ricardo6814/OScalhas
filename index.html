@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>CalhaPro — Sistema de OS</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+
+:root{
+  --navy:#0d1b2a;
+  --navy2:#162233;
+  --navy3:#1a2e44;
+  --blue:#1b6ca8;
+  --sky:#3a9bd5;
+  --accent:#f0a500;
+  --green:#27ae60;
+  --red:#e74c3c;
+  --white:#f5f8fb;
+  --grey:#8a9bb0;
+  --border:rgba(58,155,213,.18);
+  --shadow:0 8px 32px rgba(0,0,0,.35);
+  --card:rgba(22,34,51,.97);
+  --bnav-h:64px;
+  --hdr-h:56px;
+}
+
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--white);min-height:100vh;min-height:100dvh;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+
+/* SCREENS */
+.screen{display:none;min-height:100vh;min-height:100dvh}
+.screen.active{display:flex}
+
+/* ═══════════════ LOGIN ═══════════════ */
+#screen-login{
+  background:linear-gradient(160deg,#050e18 0%,#0d1b2a 50%,#0a1520 100%);
+  align-items:center;justify-content:center;position:relative;overflow:hidden;padding:1.5rem 1rem;
+}
+#screen-login::before{content:'';position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(ellipse 70% 50% at 15% 20%,rgba(27,108,168,.22) 0%,transparent 60%),
+             radial-gradient(ellipse 50% 40% at 85% 80%,rgba(240,165,0,.08) 0%,transparent 55%);}
+.bg-shapes{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.shape{position:absolute;border-radius:50%;opacity:.06;animation:float 8s ease-in-out infinite}
+.shape:nth-child(1){width:400px;height:400px;background:var(--blue);top:-150px;right:-100px}
+.shape:nth-child(2){width:250px;height:250px;background:var(--accent);bottom:-80px;left:-60px;animation-delay:3s}
+.shape:nth-child(3){width:140px;height:140px;background:var(--sky);top:50%;left:5%;animation-delay:1.5s}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-20px)}}
+
+.login-box{
+  position:relative;z-index:1;background:var(--card);border:1px solid var(--border);
+  border-radius:24px;padding:2.25rem 1.75rem 2rem;width:100%;max-width:420px;
+  box-shadow:var(--shadow),0 0 60px rgba(27,108,168,.12);
+  animation:loginDrop .55s cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes loginDrop{from{opacity:0;transform:translateY(-24px) scale(.96)}to{opacity:1;transform:translateY(0) scale(1)}}
+
+.login-logo{text-align:center;margin-bottom:1.75rem}
+.login-logo .icon{width:60px;height:60px;margin:0 auto .75rem;background:linear-gradient(135deg,var(--blue),var(--sky));border-radius:16px;display:grid;place-items:center;font-size:1.85rem;box-shadow:0 8px 24px rgba(27,108,168,.4)}
+.login-logo h1{font-family:'Syne',sans-serif;font-size:1.55rem;font-weight:800;letter-spacing:-.03em}
+.login-logo h1 span{color:var(--accent)}
+.login-logo p{font-size:.8rem;color:var(--grey);margin-top:.25rem}
+.login-title{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;margin-bottom:1.35rem;text-align:center}
+
+/* FORM GLOBALS */
+.form-group{margin-bottom:1rem;position:relative}
+label{display:block;font-size:.7rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--grey);margin-bottom:.38rem}
+input,select,textarea{
+  width:100%;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:12px;
+  color:var(--white);font-family:'DM Sans',sans-serif;font-size:1rem;
+  padding:.75rem 1rem;outline:none;transition:border-color .2s,box-shadow .2s,background .2s;
+  appearance:none;-webkit-appearance:none;
+}
+input::placeholder,textarea::placeholder{color:rgba(138,155,176,.45)}
+input:focus,select:focus,textarea:focus{border-color:var(--sky);background:rgba(58,155,213,.08);box-shadow:0 0 0 3px rgba(58,155,213,.13)}
+select option{background:var(--navy2);color:var(--white)}
+textarea{resize:vertical;min-height:100px;line-height:1.5}
+.pw-wrap{position:relative}
+.pw-wrap input{padding-right:3rem}
+.pw-eye{position:absolute;right:.85rem;top:50%;transform:translateY(-50%);cursor:pointer;color:var(--grey);font-size:1.1rem;background:none;border:none;padding:4px;min-width:32px;min-height:32px;display:grid;place-items:center}
+
+.btn-primary{background:linear-gradient(135deg,var(--blue),var(--sky));color:#fff;width:100%;border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:600;padding:.9rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.5rem;box-shadow:0 4px 18px rgba(27,108,168,.4);transition:all .2s;min-height:52px}
+.btn-primary:active{transform:scale(.97)}
+
+.login-hint{text-align:center;margin-top:1rem;font-size:.73rem;color:var(--grey)}
+.login-hint span{color:rgba(138,155,176,.55);display:block;margin-top:.25rem;font-size:.66rem}
+.login-error{background:rgba(231,76,60,.12);border:1px solid rgba(231,76,60,.25);color:#ff7066;border-radius:8px;padding:.65rem 1rem;font-size:.82rem;margin-bottom:1rem;display:none}
+.login-error.show{display:block;animation:shake .35s ease}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+
+/* ═══════════════ DASHBOARD SCREEN ═══════════════ */
+#screen-dashboard{flex-direction:column;position:relative}
+#screen-dashboard::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(ellipse 80% 50% at 20% 0%,rgba(27,108,168,.13) 0%,transparent 60%),
+             radial-gradient(ellipse 60% 40% at 85% 100%,rgba(240,165,0,.05) 0%,transparent 55%);}
+
+/* HEADER */
+header{position:sticky;top:0;z-index:200;background:rgba(13,27,42,.96);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 1rem;display:flex;align-items:center;justify-content:space-between;height:var(--hdr-h);flex-shrink:0}
+.logo{display:flex;align-items:center;gap:.6rem;font-family:'Syne',sans-serif;font-weight:800;font-size:1.2rem;letter-spacing:-.03em}
+.logo-icon{width:32px;height:32px;background:linear-gradient(135deg,var(--blue),var(--sky));border-radius:8px;display:grid;place-items:center;font-size:.95rem;flex-shrink:0}
+.logo span{color:var(--accent)}
+.header-right{display:flex;align-items:center;gap:.75rem}
+.header-stats{display:flex;gap:1rem}
+.hstat{display:flex;flex-direction:column;align-items:flex-end;font-size:.62rem;color:var(--grey);text-transform:uppercase;letter-spacing:.05em}
+.hstat strong{font-family:'Syne',sans-serif;font-size:.95rem;font-weight:700;color:var(--white);line-height:1}
+.btn-logout{background:rgba(231,76,60,.12);color:#ff7066;border:1px solid rgba(231,76,60,.22);border-radius:8px;padding:.4rem .7rem;font-size:.75rem;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:500;transition:all .2s;display:flex;align-items:center;gap:.3rem;min-height:36px}
+.btn-logout:hover{background:rgba(231,76,60,.25)}
+
+/* DESKTOP TAB BAR */
+.nav-tabs-bar{position:relative;z-index:100;background:rgba(13,27,42,.75);border-bottom:1px solid var(--border);display:flex;padding:0 1rem;overflow-x:auto;scrollbar-width:none}
+.nav-tabs-bar::-webkit-scrollbar{display:none}
+.tab-btn{display:flex;align-items:center;gap:.4rem;padding:.8rem 1.1rem;font-size:.8rem;font-weight:500;color:var(--grey);background:none;border:none;cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;transition:color .2s,border-color .2s;font-family:'DM Sans',sans-serif;min-height:44px}
+.tab-btn:hover{color:var(--white)}
+.tab-btn.active{color:var(--sky);border-bottom-color:var(--sky)}
+.tab-badge{background:var(--blue);color:#fff;font-size:.58rem;padding:1px 6px;border-radius:20px;font-weight:700;min-width:17px;text-align:center}
+
+/* BOTTOM NAV */
+.bottom-nav{display:none;position:fixed;bottom:0;left:0;right:0;z-index:300;height:var(--bnav-h);background:rgba(13,27,42,.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-top:1px solid var(--border);padding-bottom:env(safe-area-inset-bottom)}
+.bottom-nav-inner{display:flex;height:100%;align-items:center;justify-content:space-around}
+.bnav-btn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.2rem;flex:1;height:100%;background:none;border:none;cursor:pointer;color:var(--grey);font-family:'DM Sans',sans-serif;font-size:.58rem;font-weight:500;transition:color .2s;padding:.4rem .2rem;position:relative}
+.bnav-btn .bico{font-size:1.3rem;line-height:1;transition:transform .2s}
+.bnav-btn.active{color:var(--sky)}
+.bnav-btn.active .bico{transform:translateY(-2px)}
+.bnav-badge{position:absolute;top:.4rem;right:calc(50% - 1.1rem);background:var(--blue);color:#fff;font-size:.5rem;padding:1px 5px;border-radius:20px;font-weight:700;min-width:15px;text-align:center}
+.bnav-fab{width:50px;height:50px;border-radius:14px;background:linear-gradient(135deg,var(--blue),var(--sky));box-shadow:0 4px 16px rgba(27,108,168,.5);display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-top:-6px;transition:transform .15s}
+.bnav-btn:active .bnav-fab{transform:scale(.9)}
+
+/* CONTENT */
+.dash-content{position:relative;z-index:1;flex:1;padding:1.25rem 1rem 1.5rem;overflow:auto}
+
+/* PAGES */
+.page{display:none}
+.page.active{display:block;animation:pageIn .25s ease}
+@keyframes pageIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+
+/* STATS GRID */
+.stats-row{display:grid;grid-template-columns:repeat(2,1fr);gap:.85rem;margin-bottom:1.5rem}
+.stat-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.1rem;display:flex;align-items:center;gap:.85rem;box-shadow:var(--shadow)}
+.stat-icon{width:42px;height:42px;border-radius:11px;display:grid;place-items:center;font-size:1.2rem;flex-shrink:0}
+.stat-icon.blue{background:rgba(27,108,168,.22);color:var(--sky)}
+.stat-icon.green{background:rgba(39,174,96,.2);color:#2ecc71}
+.stat-icon.acc{background:rgba(240,165,0,.18);color:var(--accent)}
+.stat-icon.red{background:rgba(231,76,60,.14);color:#ff7066}
+.stat-info strong{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;display:block;line-height:1.1}
+.stat-info span{font-size:.68rem;color:var(--grey)}
+
+/* PANEL */
+.panel{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:1.4rem 1.25rem;box-shadow:var(--shadow);margin-bottom:1.25rem}
+.panel-title{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;margin-bottom:1.25rem;display:flex;align-items:center;gap:.55rem;flex-wrap:wrap}
+.panel-title .badge{background:var(--blue);color:#fff;font-size:.6rem;padding:2px 8px;border-radius:20px;font-family:'DM Sans',sans-serif;font-weight:500}
+
+/* FORM ROW */
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:.85rem}
+
+/* ACTION BUTTONS */
+.btn-form-primary{background:linear-gradient(135deg,var(--blue),var(--sky));color:#fff;border:none;border-radius:12px;padding:.85rem 1.35rem;font-size:.95rem;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:.5rem;transition:all .2s;font-family:'DM Sans',sans-serif;box-shadow:0 4px 18px rgba(27,108,168,.35);min-height:50px}
+.btn-form-primary:active{transform:scale(.97)}
+.btn-form-secondary{background:rgba(255,255,255,.06);color:var(--grey);border:1px solid var(--border);border-radius:12px;padding:.85rem 1.1rem;font-size:.88rem;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s;min-height:50px}
+.btn-form-secondary:hover{background:rgba(255,255,255,.1);color:var(--white)}
+.form-actions{display:flex;gap:.65rem;flex-wrap:wrap;margin-top:.5rem}
+
+/* SEARCH */
+.search-wrap{position:relative;margin-bottom:1rem}
+.search-wrap input{padding-left:2.75rem}
+.search-icon{position:absolute;left:.9rem;top:50%;transform:translateY(-50%);color:var(--grey);pointer-events:none}
+
+/* FILTER CHIPS */
+.filter-bar{display:flex;gap:.5rem;overflow-x:auto;margin-bottom:1rem;padding-bottom:.25rem;scrollbar-width:none}
+.filter-bar::-webkit-scrollbar{display:none}
+.filter-chip{background:rgba(255,255,255,.05);border:1px solid var(--border);color:var(--grey);border-radius:8px;padding:.45rem .9rem;font-size:.74rem;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s;white-space:nowrap;min-height:36px;display:flex;align-items:center}
+.filter-chip.active{background:rgba(58,155,213,.15);border-color:var(--sky);color:var(--sky);font-weight:600}
+.count-chip{font-size:.7rem;color:var(--grey)}
+
+/* OS CARDS */
+#lista-os{display:flex;flex-direction:column;gap:.9rem}
+.os-card{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:14px;padding:1rem 1.1rem;animation:slideIn .28s ease;transition:background .2s,border-color .2s}
+.os-card:active{background:rgba(58,155,213,.06);border-color:rgba(58,155,213,.28)}
+@keyframes slideIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+
+.os-header{display:flex;align-items:center;gap:.5rem;margin-bottom:.45rem;flex-wrap:wrap}
+.os-id{background:linear-gradient(135deg,var(--blue),var(--sky));color:#fff;font-family:'Syne',sans-serif;font-size:.65rem;font-weight:700;padding:2px 9px;border-radius:20px;letter-spacing:.04em;flex-shrink:0}
+.os-name{font-family:'Syne',sans-serif;font-size:.92rem;font-weight:700;word-break:break-word}
+.os-date{font-size:.68rem;color:var(--grey);flex-shrink:0}
+.os-info{display:flex;flex-wrap:wrap;gap:.3rem .75rem;font-size:.76rem;color:var(--grey);margin-bottom:.4rem}
+.os-info span{display:flex;align-items:center;gap:.25rem}
+.os-info span em{color:var(--white);font-style:normal;word-break:break-all}
+.os-produto{display:inline-block;background:rgba(240,165,0,.12);color:var(--accent);border:1px solid rgba(240,165,0,.2);font-size:.68rem;padding:2px 10px;border-radius:20px;font-weight:500;margin-bottom:.35rem}
+.os-status-badge{display:inline-flex;align-items:center;gap:.28rem;font-size:.68rem;padding:2px 9px;border-radius:20px;font-weight:600;margin-left:.25rem}
+.os-status-badge.aberta{background:rgba(58,155,213,.15);color:var(--sky);border:1px solid rgba(58,155,213,.25)}
+.os-status-badge.concluida{background:rgba(39,174,96,.15);color:#2ecc71;border:1px solid rgba(39,174,96,.25)}
+.os-status-badge.cancelada{background:rgba(231,76,60,.12);color:#ff7066;border:1px solid rgba(231,76,60,.2)}
+.os-desc{font-size:.78rem;color:rgba(245,248,251,.58);line-height:1.55;border-left:2px solid var(--border);padding-left:.6rem;margin-bottom:.75rem;word-break:break-word}
+
+/* OS ACTION ROW */
+.os-actions{display:flex;gap:.5rem;flex-wrap:wrap;padding-top:.65rem;border-top:1px solid var(--border)}
+.btn-edit{flex:1;min-width:80px;background:rgba(58,155,213,.14);color:var(--sky);border:1px solid rgba(58,155,213,.25);border-radius:9px;padding:.55rem .75rem;cursor:pointer;font-size:.78rem;font-weight:500;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:.3rem;font-family:'DM Sans',sans-serif;min-height:42px}
+.btn-edit:hover{background:rgba(58,155,213,.28)}
+.btn-status{flex:1;min-width:80px;background:rgba(39,174,96,.12);color:#2ecc71;border:1px solid rgba(39,174,96,.22);border-radius:9px;padding:.55rem .75rem;cursor:pointer;font-size:.78rem;font-weight:500;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:.3rem;font-family:'DM Sans',sans-serif;min-height:42px}
+.btn-status:hover{background:rgba(39,174,96,.25)}
+.btn-del{background:rgba(231,76,60,.11);color:#ff7066;border:1px solid rgba(231,76,60,.2);border-radius:9px;padding:.55rem .85rem;cursor:pointer;font-size:.88rem;transition:all .2s;display:flex;align-items:center;justify-content:center;min-height:42px;min-width:42px}
+.btn-del:hover{background:rgba(231,76,60,.24)}
+
+/* EMPTY STATE */
+.empty-state{text-align:center;padding:2.5rem 1rem;color:var(--grey)}
+.empty-state .icon{font-size:2.75rem;margin-bottom:.65rem;opacity:.35}
+.empty-state p{font-size:.86rem}
+
+/* TOAST */
+#toast{
+  position:fixed;z-index:9999;
+  background:var(--green);color:#fff;border-radius:12px;padding:.8rem 1.3rem;font-size:.85rem;font-weight:500;display:flex;align-items:center;gap:.5rem;box-shadow:0 8px 24px rgba(39,174,96,.4);pointer-events:none;max-width:92vw;
+  bottom:calc(var(--bnav-h) + .85rem);left:50%;
+  transform:translateX(-50%) translateY(130%);opacity:0;
+  transition:all .38s cubic-bezier(.34,1.56,.64,1);
+}
+#toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+#toast.error{background:var(--red);box-shadow:0 8px 24px rgba(231,76,60,.4)}
+
+/* MODAL — bottom sheet on mobile */
+.overlay{position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:grid;place-items:end center;opacity:0;pointer-events:none;transition:opacity .25s}
+.overlay.open{opacity:1;pointer-events:all}
+.modal{background:var(--navy3);border:1px solid var(--border);border-radius:22px 22px 0 0;padding:1.75rem 1.5rem;width:100%;max-width:560px;transform:translateY(100%);transition:transform .3s cubic-bezier(.34,1.2,.64,1);box-shadow:0 -8px 40px rgba(0,0,0,.5);max-height:90dvh;overflow-y:auto;padding-bottom:calc(1.75rem + env(safe-area-inset-bottom))}
+.overlay.open .modal{transform:translateY(0)}
+.modal-handle{width:40px;height:4px;background:rgba(255,255,255,.15);border-radius:2px;margin:0 auto 1.5rem}
+.modal-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.35rem}
+.modal-title{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700}
+.btn-close{background:none;border:none;color:var(--grey);font-size:1.2rem;cursor:pointer;padding:4px 8px;border-radius:6px;min-width:36px;min-height:36px;display:grid;place-items:center}
+.btn-close:hover{color:var(--white)}
+.modal-actions{display:flex;gap:.65rem;margin-top:1.35rem;flex-direction:column}
+.modal-actions .btn-form-primary,.modal-actions .btn-form-secondary{width:100%;justify-content:center;text-align:center}
+
+/* CONFIG */
+.danger-zone{border:1px solid rgba(231,76,60,.22);border-radius:12px;padding:1.1rem;margin-top:1.25rem}
+.danger-title{font-size:.72rem;color:#ff7066;text-transform:uppercase;letter-spacing:.06em;font-weight:600;margin-bottom:.85rem}
+
+/* ═══════════════ RESPONSIVE ═══════════════ */
+
+/* ≥600px: 4-col stats, desktop toast */
+@media(min-width:600px){
+  .stats-row{grid-template-columns:repeat(4,1fr)}
+  #toast{left:auto;right:1.5rem;bottom:1.5rem;transform:translateY(130%)}
+  #toast.show{transform:translateY(0)}
+}
+
+/* ≥768px: show tab bar, hide bottom nav, fix modal */
+@media(min-width:768px){
+  :root{--hdr-h:62px;--bnav-h:0px}
+  header{padding:0 1.75rem}
+  .nav-tabs-bar{padding:0 1.75rem}
+  .bottom-nav{display:none !important}
+  .dash-content{padding:1.75rem}
+  .panel{padding:1.75rem}
+  .form-row{grid-template-columns:1fr 1fr}
+  .overlay{place-items:center}
+  .modal{border-radius:22px;margin:1rem;transform:scale(.93) translateY(0)}
+  .overlay.open .modal{transform:scale(1) translateY(0)}
+  .modal-handle{display:none}
+  .modal-actions{flex-direction:row;justify-content:flex-end}
+  .modal-actions .btn-form-primary,.modal-actions .btn-form-secondary{width:auto}
+  #toast{left:auto;right:1.5rem;bottom:1.5rem;transform:translateY(130%)}
+  #toast.show{transform:translateY(0)}
+}
+
+/* ≤767px: show bottom nav, hide tab bar, single col form */
+@media(max-width:767px){
+  .nav-tabs-bar{display:none}
+  .bottom-nav{display:block}
+  .header-stats{display:none}
+  .dash-content{padding:1rem 1rem calc(var(--bnav-h) + 1.25rem)}
+  .form-row{grid-template-columns:1fr}
+  .os-actions{flex-wrap:wrap}
+}
+
+/* ≤360px: tighten everything */
+@media(max-width:360px){
+  .login-box{padding:1.75rem 1.25rem 1.5rem}
+  .stat-card{padding:.9rem .85rem;gap:.65rem}
+  .stat-info strong{font-size:1.3rem}
+  .panel{padding:1.1rem .9rem}
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════ LOGIN ══════════════ -->
+<div id="screen-login" class="screen active">
+  <div class="bg-shapes">
+    <div class="shape"></div><div class="shape"></div><div class="shape"></div>
+  </div>
+  <div class="login-box">
+    <div class="login-logo">
+      <div class="icon">🏗️</div>
+      <h1>Calha<span>Pro</span></h1>
+      <p>Sistema de Ordens de Serviço</p>
+    </div>
+    <p class="login-title">Acesse sua conta</p>
+    <div class="login-error" id="login-error">Usuário ou senha incorretos.</div>
+    <div class="form-group">
+      <label>Usuário</label>
+      <input type="text" id="login-user" placeholder="admin" autocomplete="username" inputmode="text">
+    </div>
+    <div class="form-group">
+      <label>Senha</label>
+      <div class="pw-wrap">
+        <input type="password" id="login-pass" placeholder="••••••••" autocomplete="current-password">
+        <button type="button" class="pw-eye" onclick="toggleSenha()" aria-label="Mostrar senha">👁</button>
+      </div>
+    </div>
+    <button class="btn-primary" onclick="fazerLogin()">🔐 Entrar</button>
+    <div class="login-hint">
+      Padrão: <strong>admin</strong> / <strong>calha123</strong>
+      <span>Altere nas configurações após entrar</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ DASHBOARD ══════════════ -->
+<div id="screen-dashboard" class="screen">
+
+  <header>
+    <div class="logo">
+      <div class="logo-icon">🏗️</div>
+      Calha<span>Pro</span>
+    </div>
+    <div class="header-right">
+      <div class="header-stats">
+        <div class="hstat"><strong id="h-total">0</strong>Total</div>
+        <div class="hstat"><strong id="h-hoje">0</strong>Hoje</div>
+        <div class="hstat"><strong id="h-abertas">0</strong>Abertas</div>
+      </div>
+      <button class="btn-logout" onclick="fazerLogout()">🚪 Sair</button>
+    </div>
+  </header>
+
+  <!-- Desktop tabs -->
+  <div class="nav-tabs-bar">
+    <button class="tab-btn active" onclick="mudarPagina('dashboard',this)">📊 Dashboard</button>
+    <button class="tab-btn" onclick="mudarPagina('nova-os',this)">➕ Nova OS</button>
+    <button class="tab-btn" onclick="mudarPagina('lista-os-page',this)">📂 Ordens <span class="tab-badge" id="tab-count">0</span></button>
+    <button class="tab-btn" onclick="mudarPagina('config',this)">⚙️ Configurações</button>
+  </div>
+
+  <!-- Content -->
+  <div class="dash-content">
+
+    <!-- DASHBOARD -->
+    <div id="page-dashboard" class="page active">
+      <div class="stats-row">
+        <div class="stat-card"><div class="stat-icon blue">📋</div><div class="stat-info"><strong id="ds-total">0</strong><span>Total OS</span></div></div>
+        <div class="stat-card"><div class="stat-icon green">✅</div><div class="stat-info"><strong id="ds-concluidas">0</strong><span>Concluídas</span></div></div>
+        <div class="stat-card"><div class="stat-icon acc">🔓</div><div class="stat-info"><strong id="ds-abertas">0</strong><span>Em Aberto</span></div></div>
+        <div class="stat-card"><div class="stat-icon red">❌</div><div class="stat-info"><strong id="ds-canceladas">0</strong><span>Canceladas</span></div></div>
+      </div>
+      <div class="panel">
+        <div class="panel-title">🕐 OS Recentes</div>
+        <div id="os-recentes"></div>
+      </div>
+    </div>
+
+    <!-- NOVA OS -->
+    <div id="page-nova-os" class="page">
+      <div class="panel">
+        <div class="panel-title">
+          📋 <span id="form-title-text">Nova Ordem de Serviço</span>
+          <span class="badge" id="form-mode-badge">Nova</span>
+        </div>
+        <input type="hidden" id="edit-id">
+        <div class="form-row" style="margin-bottom:.15rem">
+          <div class="form-group">
+            <label>Nome do Cliente *</label>
+            <input type="text" id="f-nome" placeholder="Ex: João da Silva" autocomplete="name">
+          </div>
+          <div class="form-group">
+            <label>Telefone *</label>
+            <input type="tel" id="f-tel" placeholder="(00) 00000-0000" maxlength="16" inputmode="tel">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Endereço *</label>
+          <input type="text" id="f-end" placeholder="Rua, número, bairro, cidade">
+        </div>
+        <div class="form-row" style="margin-bottom:.15rem">
+          <div class="form-group">
+            <label>Produto / Serviço *</label>
+            <select id="f-prod">
+              <option value="">Selecione...</option>
+              <option>Calha PVC</option>
+              <option>Calha Alumínio</option>
+              <option>Calha Galvanizada</option>
+              <option>Rufos</option>
+              <option>Instalação</option>
+              <option>Manutenção</option>
+              <option>Limpeza de Calhas</option>
+              <option>Orçamento</option>
+              <option>Outro</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Status</label>
+            <select id="f-status">
+              <option value="Aberta">🔓 Aberta</option>
+              <option value="Concluída">✅ Concluída</option>
+              <option value="Cancelada">❌ Cancelada</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Descrição do Serviço *</label>
+          <textarea id="f-desc" placeholder="Descreva detalhes do serviço a ser realizado..."></textarea>
+        </div>
+        <div class="form-group">
+          <label>Observações</label>
+          <input type="text" id="f-obs" placeholder="Observações adicionais (opcional)">
+        </div>
+        <div class="form-actions">
+          <button class="btn-form-primary" onclick="salvarOS()">
+            <span id="btn-save-icon">✚</span>
+            <span id="btn-save-label">Criar Ordem de Serviço</span>
+          </button>
+          <button class="btn-form-secondary" id="btn-cancelar" onclick="cancelarEdicao()" style="display:none">
+            ✕ Cancelar edição
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- LISTA OS -->
+    <div id="page-lista-os-page" class="page">
+      <div class="panel">
+        <div class="panel-title" style="justify-content:space-between">
+          <span>📂 Ordens de Serviço</span>
+          <span class="count-chip"><span id="count-visible">0</span> registros</span>
+        </div>
+        <div class="search-wrap">
+          <span class="search-icon">🔍</span>
+          <input type="search" id="busca" placeholder="Buscar por nome ou telefone..." oninput="renderLista()" autocomplete="off">
+        </div>
+        <div class="filter-bar">
+          <button class="filter-chip active" data-status="todos" onclick="filtrarStatus(this)">Todos</button>
+          <button class="filter-chip" data-status="Aberta" onclick="filtrarStatus(this)">🔓 Abertas</button>
+          <button class="filter-chip" data-status="Concluída" onclick="filtrarStatus(this)">✅ Concluídas</button>
+          <button class="filter-chip" data-status="Cancelada" onclick="filtrarStatus(this)">❌ Canceladas</button>
+        </div>
+        <div id="lista-os"></div>
+      </div>
+    </div>
+
+    <!-- CONFIG -->
+    <div id="page-config" class="page">
+      <div class="panel" style="max-width:480px">
+        <div class="panel-title">⚙️ Configurações</div>
+        <p style="font-size:.8rem;color:var(--grey);margin-bottom:1.35rem">Altere as credenciais de acesso ao sistema.</p>
+        <div class="form-group">
+          <label>Novo Usuário</label>
+          <input type="text" id="cfg-user" placeholder="Digite o novo usuário" autocomplete="username">
+        </div>
+        <div class="form-group">
+          <label>Nova Senha</label>
+          <input type="password" id="cfg-pass" placeholder="Digite a nova senha" autocomplete="new-password">
+        </div>
+        <div class="form-group">
+          <label>Confirmar Senha</label>
+          <input type="password" id="cfg-pass2" placeholder="Confirme a nova senha" autocomplete="new-password">
+        </div>
+        <button class="btn-form-primary" onclick="salvarConfig()">💾 Salvar Credenciais</button>
+        <div class="danger-zone">
+          <p class="danger-title">⚠️ Zona de perigo</p>
+          <button class="btn-form-secondary" style="border-color:rgba(231,76,60,.3);color:#ff7066;width:100%;justify-content:center;text-align:center" onclick="limparTudo()">🗑️ Apagar todas as OS</button>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /dash-content -->
+
+  <!-- BOTTOM NAV (mobile) -->
+  <nav class="bottom-nav" id="bottom-nav">
+    <div class="bottom-nav-inner">
+      <button class="bnav-btn active" id="bnav-0" onclick="bnavClick('dashboard',0)">
+        <span class="bico">📊</span><span>Início</span>
+      </button>
+      <button class="bnav-btn" id="bnav-2" onclick="bnavClick('lista-os-page',2)">
+        <span class="bico">📂</span><span>Ordens</span>
+        <span class="bnav-badge" id="bnav-count">0</span>
+      </button>
+      <button class="bnav-btn" id="bnav-1" onclick="bnavClick('nova-os',1)">
+        <span class="bnav-fab">➕</span>
+      </button>
+      <button class="bnav-btn" id="bnav-3" onclick="bnavClick('config',3)">
+        <span class="bico">⚙️</span><span>Config</span>
+      </button>
+      <button class="bnav-btn" onclick="fazerLogout()">
+        <span class="bico">🚪</span><span>Sair</span>
+      </button>
+    </div>
+  </nav>
+
+</div><!-- /screen-dashboard -->
+
+<!-- MODAL STATUS -->
+<div class="overlay" id="modal-overlay">
+  <div class="modal">
+    <div class="modal-handle"></div>
+    <div class="modal-hdr">
+      <span class="modal-title">🔄 Alterar Status</span>
+      <button class="btn-close" onclick="fecharModal()">✕</button>
+    </div>
+    <div id="modal-body"></div>
+    <div class="modal-actions">
+      <button class="btn-form-secondary" onclick="fecharModal()">Cancelar</button>
+      <button class="btn-form-primary" onclick="salvarEdicaoModal()">💾 Salvar</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+const $=id=>document.getElementById(id);
+const hoje=()=>new Date().toISOString().slice(0,10);
+
+function toast(msg,tipo='ok'){
+  const el=$('toast');
+  el.textContent=(tipo==='ok'?'✔ ':'⚠ ')+msg;
+  el.className=tipo==='ok'?'show':'show error';
+  clearTimeout(toast._t);
+  toast._t=setTimeout(()=>el.className='',3200);
+}
+function fmt(d){if(!d)return'';const[y,m,dia]=d.split('-');return`${dia}/${m}/${y}`}
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+
+// phone mask
+$('f-tel').addEventListener('input',e=>{
+  let v=e.target.value.replace(/\D/g,'').slice(0,11);
+  if(v.length>=7)v=`(${v.slice(0,2)}) ${v.slice(2,7)}-${v.slice(7)}`;
+  else if(v.length>=3)v=`(${v.slice(0,2)}) ${v.slice(2)}`;
+  e.target.value=v;
+});
+
+// ── AUTH ──
+function getCreds(){return JSON.parse(localStorage.getItem('cp_creds')||'{"user":"admin","pass":"calha123"}')}
+
+function fazerLogin(){
+  const u=$('login-user').value.trim(),p=$('login-pass').value,c=getCreds();
+  if(u===c.user&&p===c.pass){
+    $('screen-login').classList.remove('active');
+    $('screen-dashboard').classList.add('active');
+    $('login-error').classList.remove('show');
+    $('login-pass').value='';
+    renderDashboard();renderLista();atualizarHeader();
+  }else{
+    $('login-error').classList.remove('show');
+    void $('login-error').offsetWidth;
+    $('login-error').classList.add('show');
+  }
+}
+function fazerLogout(){
+  $('screen-dashboard').classList.remove('active');
+  $('screen-login').classList.add('active');
+  $('login-user').value='';$('login-pass').value='';
+}
+function toggleSenha(){const i=$('login-pass');i.type=i.type==='password'?'text':'password'}
+['login-user','login-pass'].forEach(id=>$(id).addEventListener('keydown',e=>{if(e.key==='Enter')fazerLogin()}));
+
+// ── NAV ──
+let filtroAtual='todos';
+
+function mudarPagina(pid,tabBtn){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  $('page-'+pid).classList.add('active');
+  if(tabBtn)tabBtn.classList.add('active');
+  if(pid==='dashboard')renderDashboard();
+  if(pid==='lista-os-page')renderLista();
+}
+
+function bnavClick(pid,idx){
+  mudarPagina(pid,null);
+  document.querySelectorAll('.bnav-btn').forEach(b=>b.classList.remove('active'));
+  $('bnav-'+idx)&&$('bnav-'+idx).classList.add('active');
+}
+
+function filtrarStatus(btn){
+  document.querySelectorAll('.filter-chip').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');filtroAtual=btn.dataset.status;renderLista();
+}
+
+// ── DATA ──
+function getOS(){return JSON.parse(localStorage.getItem('cp_os')||'[]')}
+function setOS(d){localStorage.setItem('cp_os',JSON.stringify(d))}
+function gerarID(){
+  const l=getOS(),max=l.length?Math.max(...l.map(o=>parseInt(o.id.replace('OS-','')))):0;
+  return'OS-'+String(max+1).padStart(4,'0');
+}
+
+// ── FORM ──
+function limparForm(){
+  ['f-nome','f-tel','f-end','f-desc','f-obs'].forEach(id=>$(id).value='');
+  $('f-prod').value='';$('f-status').value='Aberta';$('edit-id').value='';
+  $('btn-save-label').textContent='Criar Ordem de Serviço';$('btn-save-icon').textContent='✚';
+  $('form-mode-badge').textContent='Nova';$('form-title-text').textContent='Nova Ordem de Serviço';
+  $('btn-cancelar').style.display='none';
+}
+function validar(){
+  const checks=[[$('f-nome').value.trim(),'Informe o nome do cliente.'],[$('f-tel').value.trim(),'Informe o telefone.'],[$('f-end').value.trim(),'Informe o endereço.'],[$('f-prod').value,'Selecione o produto/serviço.'],[$('f-desc').value.trim(),'Descreva o serviço.']];
+  for(const[v,msg]of checks)if(!v){toast(msg,'err');return false;}
+  return true;
+}
+function salvarOS(){
+  if(!validar())return;
+  const editId=$('edit-id').value,lista=getOS();
+  const reg={
+    id:editId||gerarID(),nome:$('f-nome').value.trim(),telefone:$('f-tel').value.trim(),
+    endereco:$('f-end').value.trim(),produto:$('f-prod').value,status:$('f-status').value||'Aberta',
+    descricao:$('f-desc').value.trim(),obs:$('f-obs').value.trim(),data:hoje(),
+    dataCriacao:editId?(lista.find(o=>o.id===editId)||{}).dataCriacao||hoje():hoje(),
+  };
+  if(editId){const idx=lista.findIndex(o=>o.id===editId);if(idx!==-1)lista[idx]=reg;toast('OS atualizada!');}
+  else{lista.unshift(reg);toast('Ordem de Serviço criada!');}
+  setOS(lista);limparForm();atualizarHeader();
+  // go to list
+  mudarPagina('lista-os-page',null);
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.tab-btn')[2].classList.add('active');
+  document.querySelectorAll('.bnav-btn').forEach(b=>b.classList.remove('active'));
+  $('bnav-2')&&$('bnav-2').classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function cancelarEdicao(){limparForm();toast('Edição cancelada.')}
+
+// ── EDITAR ──
+function editarOS(id){
+  const os=getOS().find(o=>o.id===id);if(!os)return;
+  $('edit-id').value=os.id;$('f-nome').value=os.nome;$('f-tel').value=os.telefone;
+  $('f-end').value=os.endereco;$('f-prod').value=os.produto;$('f-status').value=os.status||'Aberta';
+  $('f-desc').value=os.descricao;$('f-obs').value=os.obs||'';
+  $('btn-save-label').textContent='Salvar Alterações';$('btn-save-icon').textContent='💾';
+  $('form-mode-badge').textContent='Editando';$('form-title-text').textContent='Editar OS';
+  $('btn-cancelar').style.display='block';
+  mudarPagina('nova-os',null);
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.tab-btn')[1].classList.add('active');
+  document.querySelectorAll('.bnav-btn').forEach(b=>b.classList.remove('active'));
+  $('bnav-1')&&$('bnav-1').classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ── MODAL STATUS ──
+function abrirModalStatus(id){
+  const os=getOS().find(o=>o.id===id);if(!os)return;
+  $('modal-body').innerHTML=`
+    <p style="font-size:.84rem;color:var(--grey);margin-bottom:1.1rem">OS: <strong style="color:var(--white)">${esc(os.id)} — ${esc(os.nome)}</strong></p>
+    <div class="form-group" style="margin-bottom:0">
+      <label>Novo Status</label>
+      <select id="modal-status">
+        <option value="Aberta" ${os.status==='Aberta'?'selected':''}>🔓 Aberta</option>
+        <option value="Concluída" ${os.status==='Concluída'?'selected':''}>✅ Concluída</option>
+        <option value="Cancelada" ${os.status==='Cancelada'?'selected':''}>❌ Cancelada</option>
+      </select>
+    </div>
+    <input type="hidden" id="modal-id" value="${os.id}">`;
+  $('modal-overlay').classList.add('open');
+}
+function salvarEdicaoModal(){
+  const id=$('modal-id').value,status=$('modal-status').value,lista=getOS();
+  const idx=lista.findIndex(o=>o.id===id);
+  if(idx!==-1){lista[idx].status=status;setOS(lista);}
+  fecharModal();toast('Status atualizado!');renderLista();renderDashboard();atualizarHeader();
+}
+function fecharModal(){$('modal-overlay').classList.remove('open')}
+$('modal-overlay').addEventListener('click',e=>{if(e.target===$('modal-overlay'))fecharModal()});
+
+// ── EXCLUIR ──
+function excluirOS(id){
+  if(!confirm(`Excluir a ordem ${id}?\nEsta ação não pode ser desfeita.`))return;
+  setOS(getOS().filter(o=>o.id!==id));toast('OS excluída.');
+  renderLista();renderDashboard();atualizarHeader();
+}
+
+// ── RENDER LISTA ──
+function renderLista(){
+  const busca=$('busca').value.toLowerCase().trim();
+  let lista=getOS();
+  if(busca)lista=lista.filter(o=>o.nome.toLowerCase().includes(busca)||o.telefone.includes(busca));
+  if(filtroAtual!=='todos')lista=lista.filter(o=>(o.status||'Aberta')===filtroAtual);
+  $('count-visible').textContent=lista.length;
+  const c=$('lista-os');
+  if(!lista.length){c.innerHTML=`<div class="empty-state"><div class="icon">📂</div><p>${busca?'Nenhuma OS encontrada.':'Nenhuma ordem cadastrada ainda.'}</p></div>`;return;}
+  const sb=s=>{const m={Aberta:'aberta',Concluída:'concluida',Cancelada:'cancelada'};const i={Aberta:'🔓',Concluída:'✅',Cancelada:'❌'};return`<span class="os-status-badge ${m[s]||'aberta'}">${i[s]||'🔓'} ${esc(s||'Aberta')}</span>`};
+  c.innerHTML=lista.map(os=>`
+    <div class="os-card">
+      <div>
+        <div class="os-header">
+          <span class="os-id">${os.id}</span>
+          <span class="os-name">${esc(os.nome)}</span>
+          ${sb(os.status||'Aberta')}
+          <span class="os-date">${fmt(os.data)}</span>
+        </div>
+        <div class="os-info">
+          <span>📞 <em>${esc(os.telefone)}</em></span>
+          <span>📍 <em>${esc(os.endereco)}</em></span>
+        </div>
+        <span class="os-produto">🔧 ${esc(os.produto)}</span>
+        <div class="os-desc">${esc(os.descricao)}${os.obs?'<br><em style="opacity:.55">Obs: '+esc(os.obs)+'</em>':''}</div>
+      </div>
+      <div class="os-actions">
+        <button class="btn-edit" onclick="editarOS('${os.id}')">✏️ Editar</button>
+        <button class="btn-status" onclick="abrirModalStatus('${os.id}')">🔄 Status</button>
+        <button class="btn-del" onclick="excluirOS('${os.id}')" title="Excluir">🗑️</button>
+      </div>
+    </div>`).join('');
+}
+
+// ── RENDER DASHBOARD ──
+function renderDashboard(){
+  const lista=getOS();
+  const conc=lista.filter(o=>o.status==='Concluída').length;
+  const aber=lista.filter(o=>(o.status||'Aberta')==='Aberta').length;
+  const canc=lista.filter(o=>o.status==='Cancelada').length;
+  $('ds-total').textContent=lista.length;$('ds-concluidas').textContent=conc;$('ds-abertas').textContent=aber;$('ds-canceladas').textContent=canc;
+  const recentes=lista.slice(0,5);
+  const sb=s=>{const m={Aberta:'aberta',Concluída:'concluida',Cancelada:'cancelada'};const i={Aberta:'🔓',Concluída:'✅',Cancelada:'❌'};return`<span class="os-status-badge ${m[s]||'aberta'}" style="font-size:.63rem">${i[s]||'🔓'} ${esc(s||'Aberta')}</span>`};
+  if(!recentes.length){
+    $('os-recentes').innerHTML=`<div class="empty-state" style="padding:1.5rem 0"><div class="icon">📋</div><p>Nenhuma OS ainda. <button onclick="bnavClick('nova-os',1)" style="background:none;border:none;color:var(--sky);cursor:pointer;font-size:.86rem">Criar agora →</button></p></div>`;
+    return;
+  }
+  $('os-recentes').innerHTML=recentes.map(os=>`
+    <div style="display:flex;align-items:center;gap:.65rem;padding:.7rem 0;border-bottom:1px solid var(--border);flex-wrap:wrap">
+      <span class="os-id" style="flex-shrink:0">${os.id}</span>
+      <span style="font-weight:500;font-size:.85rem;flex:1;min-width:90px;word-break:break-word">${esc(os.nome)}</span>
+      <span style="font-size:.75rem;color:var(--grey);flex-shrink:0">${esc(os.produto)}</span>
+      ${sb(os.status||'Aberta')}
+      <span style="font-size:.7rem;color:var(--grey);flex-shrink:0">${fmt(os.data)}</span>
+    </div>`).join('')+`<p style="margin-top:.85rem;text-align:right"><button onclick="bnavClick('lista-os-page',2)" style="background:none;border:none;color:var(--sky);cursor:pointer;font-size:.76rem">Ver todas →</button></p>`;
+}
+
+// ── HEADER STATS ──
+function atualizarHeader(){
+  const l=getOS();
+  $('h-total').textContent=l.length;
+  $('h-hoje').textContent=l.filter(o=>o.data===hoje()).length;
+  $('h-abertas').textContent=l.filter(o=>(o.status||'Aberta')==='Aberta').length;
+  $('tab-count').textContent=l.length;
+  $('bnav-count').textContent=l.length;
+}
+
+// ── CONFIG ──
+function salvarConfig(){
+  const u=$('cfg-user').value.trim(),p=$('cfg-pass').value,p2=$('cfg-pass2').value;
+  if(!u){toast('Informe o novo usuário.','err');return}
+  if(!p){toast('Informe a nova senha.','err');return}
+  if(p!==p2){toast('As senhas não coincidem.','err');return}
+  localStorage.setItem('cp_creds',JSON.stringify({user:u,pass:p}));
+  $('cfg-user').value='';$('cfg-pass').value='';$('cfg-pass2').value='';
+  toast('Credenciais salvas com sucesso!');
+}
+function limparTudo(){
+  if(!confirm('Apagar TODAS as OS?\nAção IRREVERSÍVEL!'))return;
+  if(!confirm('Certeza? Todos os dados serão perdidos!'))return;
+  setOS([]);renderLista();renderDashboard();atualizarHeader();toast('Todas as OS foram removidas.');
+}
+
+// INIT
+atualizarHeader();
+</script>
+</body>
+</html>
