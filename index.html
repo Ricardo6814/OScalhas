@@ -10,71 +10,38 @@
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-
 :root{
-  --navy:#0d1b2a;
-  --navy2:#162233;
-  --navy3:#1a2e44;
-  --blue:#1b6ca8;
-  --sky:#3a9bd5;
-  --accent:#f0a500;
-  --green:#27ae60;
-  --red:#e74c3c;
-  --white:#f5f8fb;
-  --grey:#8a9bb0;
-  --border:rgba(58,155,213,.18);
-  --shadow:0 8px 32px rgba(0,0,0,.35);
-  --card:rgba(22,34,51,.97);
-  --bnav-h:64px;
-  --hdr-h:56px;
+  --navy:#0d1b2a;--navy2:#162233;--navy3:#1a2e44;
+  --blue:#1b6ca8;--sky:#3a9bd5;--accent:#f0a500;
+  --green:#27ae60;--red:#e74c3c;--white:#f5f8fb;--grey:#8a9bb0;
+  --border:rgba(58,155,213,.18);--shadow:0 8px 32px rgba(0,0,0,.35);
+  --card:rgba(22,34,51,.97);--bnav-h:64px;--hdr-h:56px;
 }
-
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--white);min-height:100vh;min-height:100dvh;overflow-x:hidden;-webkit-font-smoothing:antialiased}
-
-/* SCREENS */
 .screen{display:none;min-height:100vh;min-height:100dvh}
 .screen.active{display:flex}
 
-/* ═══════════════ LOGIN ═══════════════ */
-#screen-login{
-  background:linear-gradient(160deg,#050e18 0%,#0d1b2a 50%,#0a1520 100%);
-  align-items:center;justify-content:center;position:relative;overflow:hidden;padding:1.5rem 1rem;
-}
-#screen-login::before{content:'';position:absolute;inset:0;z-index:0;pointer-events:none;
-  background:radial-gradient(ellipse 70% 50% at 15% 20%,rgba(27,108,168,.22) 0%,transparent 60%),
-             radial-gradient(ellipse 50% 40% at 85% 80%,rgba(240,165,0,.08) 0%,transparent 55%);}
+/* LOGIN */
+#screen-login{background:linear-gradient(160deg,#050e18 0%,#0d1b2a 50%,#0a1520 100%);align-items:center;justify-content:center;position:relative;overflow:hidden;padding:1.5rem 1rem}
+#screen-login::before{content:'';position:absolute;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse 70% 50% at 15% 20%,rgba(27,108,168,.22) 0%,transparent 60%),radial-gradient(ellipse 50% 40% at 85% 80%,rgba(240,165,0,.08) 0%,transparent 55%)}
 .bg-shapes{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
 .shape{position:absolute;border-radius:50%;opacity:.06;animation:float 8s ease-in-out infinite}
 .shape:nth-child(1){width:400px;height:400px;background:var(--blue);top:-150px;right:-100px}
 .shape:nth-child(2){width:250px;height:250px;background:var(--accent);bottom:-80px;left:-60px;animation-delay:3s}
 .shape:nth-child(3){width:140px;height:140px;background:var(--sky);top:50%;left:5%;animation-delay:1.5s}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-20px)}}
-
-.login-box{
-  position:relative;z-index:1;background:var(--card);border:1px solid var(--border);
-  border-radius:24px;padding:2.25rem 1.75rem 2rem;width:100%;max-width:420px;
-  box-shadow:var(--shadow),0 0 60px rgba(27,108,168,.12);
-  animation:loginDrop .55s cubic-bezier(.34,1.56,.64,1);
-}
+.login-box{position:relative;z-index:1;background:var(--card);border:1px solid var(--border);border-radius:24px;padding:2.25rem 1.75rem 2rem;width:100%;max-width:420px;box-shadow:var(--shadow),0 0 60px rgba(27,108,168,.12);animation:loginDrop .55s cubic-bezier(.34,1.56,.64,1)}
 @keyframes loginDrop{from{opacity:0;transform:translateY(-24px) scale(.96)}to{opacity:1;transform:translateY(0) scale(1)}}
-
 .login-logo{text-align:center;margin-bottom:1.75rem}
 .login-logo .icon{width:60px;height:60px;margin:0 auto .75rem;background:linear-gradient(135deg,var(--blue),var(--sky));border-radius:16px;display:grid;place-items:center;font-size:1.85rem;box-shadow:0 8px 24px rgba(27,108,168,.4)}
 .login-logo h1{font-family:'Syne',sans-serif;font-size:1.55rem;font-weight:800;letter-spacing:-.03em}
 .login-logo h1 span{color:var(--accent)}
 .login-logo p{font-size:.8rem;color:var(--grey);margin-top:.25rem}
 .login-title{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;margin-bottom:1.35rem;text-align:center}
-
-/* FORM GLOBALS */
 .form-group{margin-bottom:1rem;position:relative}
 label{display:block;font-size:.7rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--grey);margin-bottom:.38rem}
-input,select,textarea{
-  width:100%;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:12px;
-  color:var(--white);font-family:'DM Sans',sans-serif;font-size:1rem;
-  padding:.75rem 1rem;outline:none;transition:border-color .2s,box-shadow .2s,background .2s;
-  appearance:none;-webkit-appearance:none;
-}
+input,select,textarea{width:100%;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:12px;color:var(--white);font-family:'DM Sans',sans-serif;font-size:1rem;padding:.75rem 1rem;outline:none;transition:border-color .2s,box-shadow .2s,background .2s;appearance:none;-webkit-appearance:none}
 input::placeholder,textarea::placeholder{color:rgba(138,155,176,.45)}
 input:focus,select:focus,textarea:focus{border-color:var(--sky);background:rgba(58,155,213,.08);box-shadow:0 0 0 3px rgba(58,155,213,.13)}
 select option{background:var(--navy2);color:var(--white)}
@@ -82,23 +49,17 @@ textarea{resize:vertical;min-height:100px;line-height:1.5}
 .pw-wrap{position:relative}
 .pw-wrap input{padding-right:3rem}
 .pw-eye{position:absolute;right:.85rem;top:50%;transform:translateY(-50%);cursor:pointer;color:var(--grey);font-size:1.1rem;background:none;border:none;padding:4px;min-width:32px;min-height:32px;display:grid;place-items:center}
-
 .btn-primary{background:linear-gradient(135deg,var(--blue),var(--sky));color:#fff;width:100%;border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:600;padding:.9rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.5rem;box-shadow:0 4px 18px rgba(27,108,168,.4);transition:all .2s;min-height:52px}
 .btn-primary:active{transform:scale(.97)}
-
 .login-hint{text-align:center;margin-top:1rem;font-size:.73rem;color:var(--grey)}
 .login-hint span{color:rgba(138,155,176,.55);display:block;margin-top:.25rem;font-size:.66rem}
 .login-error{background:rgba(231,76,60,.12);border:1px solid rgba(231,76,60,.25);color:#ff7066;border-radius:8px;padding:.65rem 1rem;font-size:.82rem;margin-bottom:1rem;display:none}
 .login-error.show{display:block;animation:shake .35s ease}
 @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
 
-/* ═══════════════ DASHBOARD SCREEN ═══════════════ */
+/* DASHBOARD */
 #screen-dashboard{flex-direction:column;position:relative}
-#screen-dashboard::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
-  background:radial-gradient(ellipse 80% 50% at 20% 0%,rgba(27,108,168,.13) 0%,transparent 60%),
-             radial-gradient(ellipse 60% 40% at 85% 100%,rgba(240,165,0,.05) 0%,transparent 55%);}
-
-/* HEADER */
+#screen-dashboard::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse 80% 50% at 20% 0%,rgba(27,108,168,.13) 0%,transparent 60%),radial-gradient(ellipse 60% 40% at 85% 100%,rgba(240,165,0,.05) 0%,transparent 55%)}
 header{position:sticky;top:0;z-index:200;background:rgba(13,27,42,.96);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 1rem;display:flex;align-items:center;justify-content:space-between;height:var(--hdr-h);flex-shrink:0}
 .logo{display:flex;align-items:center;gap:.6rem;font-family:'Syne',sans-serif;font-weight:800;font-size:1.2rem;letter-spacing:-.03em}
 .logo-icon{width:32px;height:32px;background:linear-gradient(135deg,var(--blue),var(--sky));border-radius:8px;display:grid;place-items:center;font-size:.95rem;flex-shrink:0}
@@ -109,16 +70,12 @@ header{position:sticky;top:0;z-index:200;background:rgba(13,27,42,.96);backdrop-
 .hstat strong{font-family:'Syne',sans-serif;font-size:.95rem;font-weight:700;color:var(--white);line-height:1}
 .btn-logout{background:rgba(231,76,60,.12);color:#ff7066;border:1px solid rgba(231,76,60,.22);border-radius:8px;padding:.4rem .7rem;font-size:.75rem;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:500;transition:all .2s;display:flex;align-items:center;gap:.3rem;min-height:36px}
 .btn-logout:hover{background:rgba(231,76,60,.25)}
-
-/* DESKTOP TAB BAR */
 .nav-tabs-bar{position:relative;z-index:100;background:rgba(13,27,42,.75);border-bottom:1px solid var(--border);display:flex;padding:0 1rem;overflow-x:auto;scrollbar-width:none}
 .nav-tabs-bar::-webkit-scrollbar{display:none}
 .tab-btn{display:flex;align-items:center;gap:.4rem;padding:.8rem 1.1rem;font-size:.8rem;font-weight:500;color:var(--grey);background:none;border:none;cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;transition:color .2s,border-color .2s;font-family:'DM Sans',sans-serif;min-height:44px}
 .tab-btn:hover{color:var(--white)}
 .tab-btn.active{color:var(--sky);border-bottom-color:var(--sky)}
 .tab-badge{background:var(--blue);color:#fff;font-size:.58rem;padding:1px 6px;border-radius:20px;font-weight:700;min-width:17px;text-align:center}
-
-/* BOTTOM NAV */
 .bottom-nav{display:none;position:fixed;bottom:0;left:0;right:0;z-index:300;height:var(--bnav-h);background:rgba(13,27,42,.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-top:1px solid var(--border);padding-bottom:env(safe-area-inset-bottom)}
 .bottom-nav-inner{display:flex;height:100%;align-items:center;justify-content:space-around}
 .bnav-btn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.2rem;flex:1;height:100%;background:none;border:none;cursor:pointer;color:var(--grey);font-family:'DM Sans',sans-serif;font-size:.58rem;font-weight:500;transition:color .2s;padding:.4rem .2rem;position:relative}
@@ -128,16 +85,10 @@ header{position:sticky;top:0;z-index:200;background:rgba(13,27,42,.96);backdrop-
 .bnav-badge{position:absolute;top:.4rem;right:calc(50% - 1.1rem);background:var(--blue);color:#fff;font-size:.5rem;padding:1px 5px;border-radius:20px;font-weight:700;min-width:15px;text-align:center}
 .bnav-fab{width:50px;height:50px;border-radius:14px;background:linear-gradient(135deg,var(--blue),var(--sky));box-shadow:0 4px 16px rgba(27,108,168,.5);display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-top:-6px;transition:transform .15s}
 .bnav-btn:active .bnav-fab{transform:scale(.9)}
-
-/* CONTENT */
 .dash-content{position:relative;z-index:1;flex:1;padding:1.25rem 1rem 1.5rem;overflow:auto}
-
-/* PAGES */
 .page{display:none}
 .page.active{display:block;animation:pageIn .25s ease}
 @keyframes pageIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
-
-/* STATS GRID */
 .stats-row{display:grid;grid-template-columns:repeat(2,1fr);gap:.85rem;margin-bottom:1.5rem}
 .stat-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.1rem;display:flex;align-items:center;gap:.85rem;box-shadow:var(--shadow)}
 .stat-icon{width:42px;height:42px;border-radius:11px;display:grid;place-items:center;font-size:1.2rem;flex-shrink:0}
@@ -147,80 +98,78 @@ header{position:sticky;top:0;z-index:200;background:rgba(13,27,42,.96);backdrop-
 .stat-icon.red{background:rgba(231,76,60,.14);color:#ff7066}
 .stat-info strong{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;display:block;line-height:1.1}
 .stat-info span{font-size:.68rem;color:var(--grey)}
-
-/* PANEL */
 .panel{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:1.4rem 1.25rem;box-shadow:var(--shadow);margin-bottom:1.25rem}
 .panel-title{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;margin-bottom:1.25rem;display:flex;align-items:center;gap:.55rem;flex-wrap:wrap}
 .panel-title .badge{background:var(--blue);color:#fff;font-size:.6rem;padding:2px 8px;border-radius:20px;font-family:'DM Sans',sans-serif;font-weight:500}
-
-/* FORM ROW */
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:.85rem}
-
-/* ACTION BUTTONS */
 .btn-form-primary{background:linear-gradient(135deg,var(--blue),var(--sky));color:#fff;border:none;border-radius:12px;padding:.85rem 1.35rem;font-size:.95rem;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:.5rem;transition:all .2s;font-family:'DM Sans',sans-serif;box-shadow:0 4px 18px rgba(27,108,168,.35);min-height:50px}
 .btn-form-primary:active{transform:scale(.97)}
 .btn-form-secondary{background:rgba(255,255,255,.06);color:var(--grey);border:1px solid var(--border);border-radius:12px;padding:.85rem 1.1rem;font-size:.88rem;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s;min-height:50px}
 .btn-form-secondary:hover{background:rgba(255,255,255,.1);color:var(--white)}
 .form-actions{display:flex;gap:.65rem;flex-wrap:wrap;margin-top:.5rem}
 
-/* SEARCH */
-.search-wrap{position:relative;margin-bottom:1rem}
-.search-wrap input{padding-left:2.75rem}
-.search-icon{position:absolute;left:.9rem;top:50%;transform:translateY(-50%);color:var(--grey);pointer-events:none}
+/* BUSCA INTELIGENTE */
+.smart-search-wrap{position:relative;margin-bottom:.75rem}
+.smart-search-wrap input{padding-left:2.75rem;padding-right:2.75rem}
+.s-icon{position:absolute;left:.9rem;top:50%;transform:translateY(-50%);color:var(--grey);pointer-events:none;font-size:.95rem;z-index:1}
+.s-clear{position:absolute;right:.75rem;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.08);border:none;color:var(--grey);cursor:pointer;font-size:.72rem;padding:3px 7px;display:none;min-width:26px;min-height:26px;align-items:center;justify-content:center;border-radius:6px;line-height:1;font-family:'DM Sans',sans-serif}
+.s-clear.vis{display:flex}
+.s-clear:hover{background:rgba(255,255,255,.15);color:var(--white)}
 
-/* FILTER CHIPS */
-.filter-bar{display:flex;gap:.5rem;overflow-x:auto;margin-bottom:1rem;padding-bottom:.25rem;scrollbar-width:none}
-.filter-bar::-webkit-scrollbar{display:none}
-.filter-chip{background:rgba(255,255,255,.05);border:1px solid var(--border);color:var(--grey);border-radius:8px;padding:.45rem .9rem;font-size:.74rem;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s;white-space:nowrap;min-height:36px;display:flex;align-items:center}
-.filter-chip.active{background:rgba(58,155,213,.15);border-color:var(--sky);color:var(--sky);font-weight:600}
-.count-chip{font-size:.7rem;color:var(--grey)}
+/* FILTROS AVANÇADOS */
+.adv-filters{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.75rem;align-items:center}
+.adv-filters select,.adv-filters input[type=date]{background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:10px;color:var(--white);font-family:'DM Sans',sans-serif;font-size:.78rem;padding:.44rem .75rem;outline:none;appearance:none;-webkit-appearance:none;cursor:pointer;transition:border-color .2s;min-height:36px;width:auto}
+.adv-filters select:focus,.adv-filters input[type=date]:focus{border-color:var(--sky)}
+.adv-filters input[type=date]{display:none}
+.adv-filters input[type=date].show{display:block}
+
+/* TAGS ATIVAS */
+.search-tags{display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:.65rem;min-height:0}
+.stag{display:inline-flex;align-items:center;gap:.3rem;background:rgba(58,155,213,.13);border:1px solid rgba(58,155,213,.3);color:var(--sky);font-size:.67rem;padding:3px 8px 3px 10px;border-radius:20px;font-weight:500}
+.stag button{background:none;border:none;color:var(--sky);cursor:pointer;font-size:.78rem;padding:0 2px;line-height:1;opacity:.65}
+.stag button:hover{opacity:1}
+
+.count-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:.65rem;font-size:.73rem;color:var(--grey)}
+.count-row strong{color:var(--white)}
 
 /* OS CARDS */
 #lista-os{display:flex;flex-direction:column;gap:.9rem}
-.os-card{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:14px;padding:1rem 1.1rem;animation:slideIn .28s ease;transition:background .2s,border-color .2s}
-.os-card:active{background:rgba(58,155,213,.06);border-color:rgba(58,155,213,.28)}
+.os-card{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:14px;padding:1rem 1.1rem;animation:slideIn .28s ease;transition:border-color .2s}
 @keyframes slideIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
-
 .os-header{display:flex;align-items:center;gap:.5rem;margin-bottom:.45rem;flex-wrap:wrap}
 .os-id{background:linear-gradient(135deg,var(--blue),var(--sky));color:#fff;font-family:'Syne',sans-serif;font-size:.65rem;font-weight:700;padding:2px 9px;border-radius:20px;letter-spacing:.04em;flex-shrink:0}
 .os-name{font-family:'Syne',sans-serif;font-size:.92rem;font-weight:700;word-break:break-word}
-.os-date{font-size:.68rem;color:var(--grey);flex-shrink:0}
+.os-date{font-size:.68rem;color:var(--grey);flex-shrink:0;margin-left:auto}
 .os-info{display:flex;flex-wrap:wrap;gap:.3rem .75rem;font-size:.76rem;color:var(--grey);margin-bottom:.4rem}
 .os-info span{display:flex;align-items:center;gap:.25rem}
 .os-info span em{color:var(--white);font-style:normal;word-break:break-all}
 .os-produto{display:inline-block;background:rgba(240,165,0,.12);color:var(--accent);border:1px solid rgba(240,165,0,.2);font-size:.68rem;padding:2px 10px;border-radius:20px;font-weight:500;margin-bottom:.35rem}
-.os-status-badge{display:inline-flex;align-items:center;gap:.28rem;font-size:.68rem;padding:2px 9px;border-radius:20px;font-weight:600;margin-left:.25rem}
+.os-status-badge{display:inline-flex;align-items:center;gap:.28rem;font-size:.68rem;padding:2px 9px;border-radius:20px;font-weight:600}
 .os-status-badge.aberta{background:rgba(58,155,213,.15);color:var(--sky);border:1px solid rgba(58,155,213,.25)}
 .os-status-badge.concluida{background:rgba(39,174,96,.15);color:#2ecc71;border:1px solid rgba(39,174,96,.25)}
 .os-status-badge.cancelada{background:rgba(231,76,60,.12);color:#ff7066;border:1px solid rgba(231,76,60,.2)}
-.os-desc{font-size:.78rem;color:rgba(245,248,251,.58);line-height:1.55;border-left:2px solid var(--border);padding-left:.6rem;margin-bottom:.75rem;word-break:break-word}
-
-/* OS ACTION ROW */
-.os-actions{display:flex;gap:.5rem;flex-wrap:wrap;padding-top:.65rem;border-top:1px solid var(--border)}
-.btn-edit{flex:1;min-width:80px;background:rgba(58,155,213,.14);color:var(--sky);border:1px solid rgba(58,155,213,.25);border-radius:9px;padding:.55rem .75rem;cursor:pointer;font-size:.78rem;font-weight:500;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:.3rem;font-family:'DM Sans',sans-serif;min-height:42px}
+.os-desc{font-size:.78rem;color:rgba(245,248,251,.55);line-height:1.55;border-left:2px solid var(--border);padding-left:.6rem;margin-bottom:.75rem;word-break:break-word}
+.os-actions{display:flex;gap:.45rem;flex-wrap:wrap;padding-top:.65rem;border-top:1px solid var(--border)}
+.btn-edit{flex:1;min-width:66px;background:rgba(58,155,213,.14);color:var(--sky);border:1px solid rgba(58,155,213,.25);border-radius:9px;padding:.48rem .6rem;cursor:pointer;font-size:.74rem;font-weight:500;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:.3rem;font-family:'DM Sans',sans-serif;min-height:40px}
 .btn-edit:hover{background:rgba(58,155,213,.28)}
-.btn-status{flex:1;min-width:80px;background:rgba(39,174,96,.12);color:#2ecc71;border:1px solid rgba(39,174,96,.22);border-radius:9px;padding:.55rem .75rem;cursor:pointer;font-size:.78rem;font-weight:500;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:.3rem;font-family:'DM Sans',sans-serif;min-height:42px}
+.btn-status{flex:1;min-width:66px;background:rgba(39,174,96,.12);color:#2ecc71;border:1px solid rgba(39,174,96,.22);border-radius:9px;padding:.48rem .6rem;cursor:pointer;font-size:.74rem;font-weight:500;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:.3rem;font-family:'DM Sans',sans-serif;min-height:40px}
 .btn-status:hover{background:rgba(39,174,96,.25)}
-.btn-del{background:rgba(231,76,60,.11);color:#ff7066;border:1px solid rgba(231,76,60,.2);border-radius:9px;padding:.55rem .85rem;cursor:pointer;font-size:.88rem;transition:all .2s;display:flex;align-items:center;justify-content:center;min-height:42px;min-width:42px}
+.btn-print-os{background:rgba(27,108,168,.15);color:var(--sky);border:1px solid rgba(58,155,213,.27);border-radius:9px;padding:.48rem .65rem;cursor:pointer;font-size:.92rem;transition:all .2s;display:flex;align-items:center;justify-content:center;min-height:40px;min-width:40px}
+.btn-print-os:hover{background:rgba(58,155,213,.28)}
+.btn-del{background:rgba(231,76,60,.11);color:#ff7066;border:1px solid rgba(231,76,60,.2);border-radius:9px;padding:.48rem .65rem;cursor:pointer;font-size:.92rem;transition:all .2s;display:flex;align-items:center;justify-content:center;min-height:40px;min-width:40px}
 .btn-del:hover{background:rgba(231,76,60,.24)}
 
-/* EMPTY STATE */
+/* HIGHLIGHT */
+mark{background:rgba(240,165,0,.32);color:var(--white);border-radius:3px;padding:0 2px;font-style:normal}
+
 .empty-state{text-align:center;padding:2.5rem 1rem;color:var(--grey)}
 .empty-state .icon{font-size:2.75rem;margin-bottom:.65rem;opacity:.35}
 .empty-state p{font-size:.86rem}
 
-/* TOAST */
-#toast{
-  position:fixed;z-index:9999;
-  background:var(--green);color:#fff;border-radius:12px;padding:.8rem 1.3rem;font-size:.85rem;font-weight:500;display:flex;align-items:center;gap:.5rem;box-shadow:0 8px 24px rgba(39,174,96,.4);pointer-events:none;max-width:92vw;
-  bottom:calc(var(--bnav-h) + .85rem);left:50%;
-  transform:translateX(-50%) translateY(130%);opacity:0;
-  transition:all .38s cubic-bezier(.34,1.56,.64,1);
-}
+#toast{position:fixed;z-index:9999;background:var(--green);color:#fff;border-radius:12px;padding:.8rem 1.3rem;font-size:.85rem;font-weight:500;display:flex;align-items:center;gap:.5rem;box-shadow:0 8px 24px rgba(39,174,96,.4);pointer-events:none;max-width:92vw;bottom:calc(var(--bnav-h) + .85rem);left:50%;transform:translateX(-50%) translateY(130%);opacity:0;transition:all .38s cubic-bezier(.34,1.56,.64,1)}
 #toast.show{transform:translateX(-50%) translateY(0);opacity:1}
 #toast.error{background:var(--red);box-shadow:0 8px 24px rgba(231,76,60,.4)}
 
-/* MODAL — bottom sheet on mobile */
 .overlay{position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:grid;place-items:end center;opacity:0;pointer-events:none;transition:opacity .25s}
 .overlay.open{opacity:1;pointer-events:all}
 .modal{background:var(--navy3);border:1px solid var(--border);border-radius:22px 22px 0 0;padding:1.75rem 1.5rem;width:100%;max-width:560px;transform:translateY(100%);transition:transform .3s cubic-bezier(.34,1.2,.64,1);box-shadow:0 -8px 40px rgba(0,0,0,.5);max-height:90dvh;overflow-y:auto;padding-bottom:calc(1.75rem + env(safe-area-inset-bottom))}
@@ -233,64 +182,95 @@ header{position:sticky;top:0;z-index:200;background:rgba(13,27,42,.96);backdrop-
 .modal-actions{display:flex;gap:.65rem;margin-top:1.35rem;flex-direction:column}
 .modal-actions .btn-form-primary,.modal-actions .btn-form-secondary{width:100%;justify-content:center;text-align:center}
 
-/* CONFIG */
-.danger-zone{border:1px solid rgba(231,76,60,.22);border-radius:12px;padding:1.1rem;margin-top:1.25rem}
-.danger-title{font-size:.72rem;color:#ff7066;text-transform:uppercase;letter-spacing:.06em;font-weight:600;margin-bottom:.85rem}
+/* RELATÓRIOS */
+.rel-summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:.75rem;margin-bottom:1.25rem}
+.rel-sum-card{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:12px;padding:.9rem 1rem;text-align:center}
+.rel-sum-card strong{font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;display:block;line-height:1}
+.rel-sum-card span{font-size:.66rem;color:var(--grey);text-transform:uppercase;letter-spacing:.05em}
+.rel-sum-card.c-blue strong{color:var(--sky)}
+.rel-sum-card.c-green strong{color:#2ecc71}
+.rel-sum-card.c-acc strong{color:var(--accent)}
+.rel-sum-card.c-red strong{color:#ff7066}
+#rel-individual-lista{display:flex;flex-direction:column;gap:.6rem;max-height:440px;overflow-y:auto;padding-right:2px}
+#rel-lista{display:flex;flex-direction:column;gap:.65rem}
+.rel-os-row{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:12px;padding:.85rem 1rem;display:flex;align-items:flex-start;gap:.75rem;flex-wrap:wrap}
+.rel-os-info{flex:1;min-width:180px}
+.rel-os-info .rid{font-family:'Syne',sans-serif;font-size:.7rem;font-weight:700;color:var(--sky);margin-bottom:.18rem}
+.rel-os-info .rname{font-size:.88rem;font-weight:600;margin-bottom:.2rem}
+.rel-os-info .rmeta{font-size:.72rem;color:var(--grey);display:flex;flex-wrap:wrap;gap:.25rem .65rem}
+.rel-os-info .rdesc{margin-top:.3rem;font-size:.7rem;color:rgba(245,248,251,.45);line-height:1.4}
+.rel-os-actions{display:flex;align-items:center;gap:.5rem;flex-shrink:0}
+.btn-print-all{background:linear-gradient(135deg,var(--blue),var(--sky));color:#fff;border:none;border-radius:12px;padding:.65rem 1.25rem;font-size:.85rem;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:.4rem;box-shadow:0 4px 16px rgba(27,108,168,.35);transition:all .2s;font-family:'DM Sans',sans-serif;min-height:44px;white-space:nowrap}
+.btn-print-all:active{transform:scale(.97)}
+.btn-print-one{background:rgba(27,108,168,.18);color:var(--sky);border:1px solid rgba(58,155,213,.3);border-radius:9px;padding:.48rem .85rem;cursor:pointer;font-size:.76rem;font-weight:500;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:.3rem;font-family:'DM Sans',sans-serif;min-height:38px;white-space:nowrap}
+.btn-print-one:hover{background:rgba(58,155,213,.28)}
 
-/* ═══════════════ RESPONSIVE ═══════════════ */
+/* PRINT */
+@media print{body *{visibility:hidden!important}#print-area,#print-area *{visibility:visible!important}#print-area{position:fixed!important;inset:0!important;z-index:99999!important;background:#fff!important;padding:0!important;margin:0!important;overflow:visible!important}}
+#print-area{display:none;position:fixed;inset:0;z-index:9999;background:#fff;overflow:auto;font-family:'DM Sans',sans-serif;color:#1a1a2e}
+#print-area.open{display:block}
+.prt-close-bar{position:sticky;top:0;z-index:10;background:#0d1b2a;display:flex;align-items:center;justify-content:space-between;padding:.75rem 1.25rem;border-bottom:1px solid #1e3050;gap:.75rem;flex-wrap:wrap}
+.prt-close-bar-title{font-family:'Syne',sans-serif;font-size:.85rem;font-weight:700;color:#cde0f5}
+.prt-close-bar button{font-family:'DM Sans',sans-serif;font-size:.82rem;font-weight:500;cursor:pointer;border-radius:9px;padding:.5rem 1rem;min-height:38px;display:inline-flex;align-items:center;gap:.35rem}
+.btn-do-print{background:linear-gradient(135deg,#1b6ca8,#3a9bd5);color:#fff;border:none;box-shadow:0 3px 12px rgba(27,108,168,.35)}
+.btn-cancel-print{background:rgba(231,76,60,.1);color:#e74c3c;border:1px solid rgba(231,76,60,.25)}
+.prt-wrap{padding:1.5rem 2.5cm 2rem 2.5cm;max-width:960px;margin:0 auto}
+.prt-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:3px solid #1b6ca8}
+.prt-logo{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;color:#1b6ca8}
+.prt-logo small{display:block;font-size:.65rem;color:#666;font-family:'DM Sans',sans-serif;font-weight:400;letter-spacing:.04em;margin-top:.15rem}
+.prt-meta{text-align:right;font-size:.72rem;color:#555}
+.prt-meta strong{display:block;font-size:.85rem;color:#1b6ca8;font-weight:700;margin-bottom:.2rem}
+.prt-sec-title{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;color:#1b6ca8;margin-bottom:.85rem;display:flex;align-items:center;gap:.5rem}
+.prt-sec-title::after{content:'';flex:1;height:1px;background:#dde4ef}
+.prt-summary-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem;margin-bottom:1.25rem}
+.prt-sum-box{border:1px solid #dde4ef;border-radius:8px;padding:.65rem .75rem;text-align:center}
+.prt-sum-box strong{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;display:block;color:#1b6ca8}
+.prt-sum-box span{font-size:.6rem;color:#777;text-transform:uppercase;letter-spacing:.05em}
+.prt-table{width:100%;border-collapse:collapse;font-size:.74rem;margin-bottom:1.5rem}
+.prt-table th{background:#1b6ca8;color:#fff;padding:.55rem .7rem;text-align:left;font-weight:600;font-size:.67rem;letter-spacing:.04em}
+.prt-table td{padding:.5rem .7rem;border-bottom:1px solid #edf0f7;vertical-align:top;word-break:break-word}
+.prt-table tr:nth-child(even) td{background:#f7f9fd}
+.badge-p{display:inline-block;padding:1px 7px;border-radius:20px;font-size:.62rem;font-weight:600}
+.p-aberta{background:#e8f4fc;color:#1b6ca8}
+.p-concluida{background:#e6f9ef;color:#219150}
+.p-cancelada{background:#fdf0ef;color:#c0392b}
+.prt-fields{display:grid;grid-template-columns:1fr 1fr;gap:.65rem .85rem;margin-bottom:1rem}
+.prt-field{border:1px solid #dde4ef;border-radius:7px;padding:.55rem .75rem}
+.prt-field label{font-size:.58rem;text-transform:uppercase;letter-spacing:.05em;color:#888;display:block;margin-bottom:.2rem}
+.prt-field span{font-size:.82rem;color:#1a1a2e;font-weight:500}
+.prt-field.full{grid-column:1/-1}
+.prt-sign{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:2rem}
+.prt-sign-box{border-top:1px solid #aaa;padding-top:.4rem;font-size:.68rem;color:#777;text-align:center}
+.prt-footer{margin-top:1.5rem;padding-top:.85rem;border-top:1px solid #dde4ef;font-size:.65rem;color:#aaa;display:flex;justify-content:space-between;flex-wrap:wrap;gap:.3rem}
 
-/* ≥600px: 4-col stats, desktop toast */
-@media(min-width:600px){
-  .stats-row{grid-template-columns:repeat(4,1fr)}
-  #toast{left:auto;right:1.5rem;bottom:1.5rem;transform:translateY(130%)}
-  #toast.show{transform:translateY(0)}
-}
-
-/* ≥768px: show tab bar, hide bottom nav, fix modal */
+/* RESPONSIVE */
+@media(min-width:600px){.stats-row{grid-template-columns:repeat(4,1fr)}#toast{left:auto;right:1.5rem;bottom:1.5rem;transform:translateY(130%)}#toast.show{transform:translateY(0)}}
 @media(min-width:768px){
   :root{--hdr-h:62px;--bnav-h:0px}
-  header{padding:0 1.75rem}
-  .nav-tabs-bar{padding:0 1.75rem}
-  .bottom-nav{display:none !important}
-  .dash-content{padding:1.75rem}
-  .panel{padding:1.75rem}
+  header{padding:0 1.75rem}.nav-tabs-bar{padding:0 1.75rem}
+  .bottom-nav{display:none !important}.dash-content{padding:1.75rem}.panel{padding:1.75rem}
   .form-row{grid-template-columns:1fr 1fr}
-  .overlay{place-items:center}
-  .modal{border-radius:22px;margin:1rem;transform:scale(.93) translateY(0)}
-  .overlay.open .modal{transform:scale(1) translateY(0)}
-  .modal-handle{display:none}
+  .overlay{place-items:center}.modal{border-radius:22px;margin:1rem;transform:scale(.93) translateY(0)}
+  .overlay.open .modal{transform:scale(1) translateY(0)}.modal-handle{display:none}
   .modal-actions{flex-direction:row;justify-content:flex-end}
   .modal-actions .btn-form-primary,.modal-actions .btn-form-secondary{width:auto}
-  #toast{left:auto;right:1.5rem;bottom:1.5rem;transform:translateY(130%)}
-  #toast.show{transform:translateY(0)}
+  #toast{left:auto;right:1.5rem;bottom:1.5rem;transform:translateY(130%)}#toast.show{transform:translateY(0)}
 }
-
-/* ≤767px: show bottom nav, hide tab bar, single col form */
 @media(max-width:767px){
-  .nav-tabs-bar{display:none}
-  .bottom-nav{display:block}
-  .header-stats{display:none}
+  .nav-tabs-bar{display:none}.bottom-nav{display:block}.header-stats{display:none}
   .dash-content{padding:1rem 1rem calc(var(--bnav-h) + 1.25rem)}
-  .form-row{grid-template-columns:1fr}
-  .os-actions{flex-wrap:wrap}
+  .form-row{grid-template-columns:1fr}.os-actions{flex-wrap:wrap}
+  .prt-fields{grid-template-columns:1fr}.prt-summary-grid{grid-template-columns:repeat(2,1fr)}
+  .prt-wrap{padding:1rem 1rem 2rem}
 }
-
-/* ≤360px: tighten everything */
-@media(max-width:360px){
-  .login-box{padding:1.75rem 1.25rem 1.5rem}
-  .stat-card{padding:.9rem .85rem;gap:.65rem}
-  .stat-info strong{font-size:1.3rem}
-  .panel{padding:1.1rem .9rem}
-}
+@media(max-width:360px){.login-box{padding:1.75rem 1.25rem 1.5rem}.stat-card{padding:.9rem .85rem;gap:.65rem}.stat-info strong{font-size:1.3rem}.panel{padding:1.1rem .9rem}}
 </style>
 </head>
 <body>
 
-<!-- ══════════════ LOGIN ══════════════ -->
+<!-- LOGIN -->
 <div id="screen-login" class="screen active">
-  <div class="bg-shapes">
-    <div class="shape"></div><div class="shape"></div><div class="shape"></div>
-  </div>
+  <div class="bg-shapes"><div class="shape"></div><div class="shape"></div><div class="shape"></div></div>
   <div class="login-box">
     <div class="login-logo">
       <div class="icon">🏗️</div>
@@ -299,33 +279,23 @@ header{position:sticky;top:0;z-index:200;background:rgba(13,27,42,.96);backdrop-
     </div>
     <p class="login-title">Acesse sua conta</p>
     <div class="login-error" id="login-error">Usuário ou senha incorretos.</div>
-    <div class="form-group">
-      <label>Usuário</label>
-      <input type="text" id="login-user" placeholder="admin" autocomplete="username" inputmode="text">
-    </div>
+    <div class="form-group"><label>Usuário</label><input type="text" id="login-user" placeholder="admin" autocomplete="username" inputmode="text"></div>
     <div class="form-group">
       <label>Senha</label>
       <div class="pw-wrap">
         <input type="password" id="login-pass" placeholder="••••••••" autocomplete="current-password">
-        <button type="button" class="pw-eye" onclick="toggleSenha()" aria-label="Mostrar senha">👁</button>
+        <button type="button" class="pw-eye" onclick="toggleSenha()">👁</button>
       </div>
     </div>
     <button class="btn-primary" onclick="fazerLogin()">🔐 Entrar</button>
-    <div class="login-hint">
-      Padrão: <strong>admin</strong> / <strong>calha123</strong>
-      <span>Altere nas configurações após entrar</span>
-    </div>
+    <div class="login-hint">Padrão: <strong>admin</strong> / <strong>calha123</strong><span>Altere nas configurações após entrar</span></div>
   </div>
 </div>
 
-<!-- ══════════════ DASHBOARD ══════════════ -->
+<!-- DASHBOARD -->
 <div id="screen-dashboard" class="screen">
-
   <header>
-    <div class="logo">
-      <div class="logo-icon">🏗️</div>
-      Calha<span>Pro</span>
-    </div>
+    <div class="logo"><div class="logo-icon">🏗️</div>Calha<span>Pro</span></div>
     <div class="header-right">
       <div class="header-stats">
         <div class="hstat"><strong id="h-total">0</strong>Total</div>
@@ -336,18 +306,16 @@ header{position:sticky;top:0;z-index:200;background:rgba(13,27,42,.96);backdrop-
     </div>
   </header>
 
-  <!-- Desktop tabs -->
   <div class="nav-tabs-bar">
     <button class="tab-btn active" onclick="mudarPagina('dashboard',this)">📊 Dashboard</button>
     <button class="tab-btn" onclick="mudarPagina('nova-os',this)">➕ Nova OS</button>
     <button class="tab-btn" onclick="mudarPagina('lista-os-page',this)">📂 Ordens <span class="tab-badge" id="tab-count">0</span></button>
-    <button class="tab-btn" onclick="mudarPagina('config',this)">⚙️ Configurações</button>
+    <button class="tab-btn" onclick="mudarPagina('relatorios',this)">🖨️ Relatórios</button>
   </div>
 
-  <!-- Content -->
   <div class="dash-content">
 
-    <!-- DASHBOARD -->
+    <!-- DASHBOARD PAGE -->
     <div id="page-dashboard" class="page active">
       <div class="stats-row">
         <div class="stat-card"><div class="stat-icon blue">📋</div><div class="stat-info"><strong id="ds-total">0</strong><span>Total OS</span></div></div>
@@ -361,42 +329,26 @@ header{position:sticky;top:0;z-index:200;background:rgba(13,27,42,.96);backdrop-
       </div>
     </div>
 
-    <!-- NOVA OS -->
+    <!-- NOVA OS PAGE -->
     <div id="page-nova-os" class="page">
       <div class="panel">
-        <div class="panel-title">
-          📋 <span id="form-title-text">Nova Ordem de Serviço</span>
-          <span class="badge" id="form-mode-badge">Nova</span>
-        </div>
+        <div class="panel-title">📋 <span id="form-title-text">Nova Ordem de Serviço</span><span class="badge" id="form-mode-badge">Nova</span></div>
         <input type="hidden" id="edit-id">
         <div class="form-row" style="margin-bottom:.15rem">
-          <div class="form-group">
-            <label>Nome do Cliente *</label>
-            <input type="text" id="f-nome" placeholder="Ex: João da Silva" autocomplete="name">
-          </div>
-          <div class="form-group">
-            <label>Telefone *</label>
-            <input type="tel" id="f-tel" placeholder="(00) 00000-0000" maxlength="16" inputmode="tel">
-          </div>
+          <div class="form-group"><label>Nome do Cliente *</label><input type="text" id="f-nome" placeholder="Ex: João da Silva" autocomplete="name"></div>
+          <div class="form-group"><label>Telefone *</label><input type="tel" id="f-tel" placeholder="(00) 00000-0000" maxlength="16" inputmode="tel"></div>
         </div>
-        <div class="form-group">
-          <label>Endereço *</label>
-          <input type="text" id="f-end" placeholder="Rua, número, bairro, cidade">
-        </div>
+        <div class="form-group"><label>Endereço *</label><input type="text" id="f-end" placeholder="Rua, número, bairro, cidade"></div>
         <div class="form-row" style="margin-bottom:.15rem">
           <div class="form-group">
             <label>Produto / Serviço *</label>
             <select id="f-prod">
               <option value="">Selecione...</option>
-              <option>Calha PVC</option>
-              <option>Calha Alumínio</option>
-              <option>Calha Galvanizada</option>
-              <option>Rufos</option>
-              <option>Instalação</option>
-              <option>Manutenção</option>
-              <option>Limpeza de Calhas</option>
-              <option>Orçamento</option>
-              <option>Outro</option>
+              <option>Calha</option><option>Calha Galvanizada</option>
+              <option>Rufos</option><option>Rufos Internos</option>
+              <option>Condutores</option><option>Pingadeiras</option>
+              <option>Instalação</option><option>Manutenção</option>
+              <option>Limpeza de Calhas</option><option>Orçamento</option><option>Outro</option>
             </select>
           </div>
           <div class="form-group">
@@ -408,106 +360,133 @@ header{position:sticky;top:0;z-index:200;background:rgba(13,27,42,.96);backdrop-
             </select>
           </div>
         </div>
-        <div class="form-group">
-          <label>Descrição do Serviço *</label>
-          <textarea id="f-desc" placeholder="Descreva detalhes do serviço a ser realizado..."></textarea>
-        </div>
-        <div class="form-group">
-          <label>Observações</label>
-          <input type="text" id="f-obs" placeholder="Observações adicionais (opcional)">
-        </div>
+        <div class="form-group"><label>Descrição do Serviço *</label><textarea id="f-desc" placeholder="Descreva detalhes do serviço a ser realizado..."></textarea></div>
+        <div class="form-group"><label>Observações</label><input type="text" id="f-obs" placeholder="Observações adicionais (opcional)"></div>
         <div class="form-actions">
-          <button class="btn-form-primary" onclick="salvarOS()">
-            <span id="btn-save-icon">✚</span>
-            <span id="btn-save-label">Criar Ordem de Serviço</span>
-          </button>
-          <button class="btn-form-secondary" id="btn-cancelar" onclick="cancelarEdicao()" style="display:none">
-            ✕ Cancelar edição
-          </button>
+          <button class="btn-form-primary" onclick="salvarOS()"><span id="btn-save-icon">✚</span><span id="btn-save-label">Criar Ordem de Serviço</span></button>
+          <button class="btn-form-secondary" id="btn-cancelar" onclick="cancelarEdicao()" style="display:none">✕ Cancelar edição</button>
         </div>
       </div>
     </div>
 
-    <!-- LISTA OS -->
+    <!-- LISTA OS PAGE -->
     <div id="page-lista-os-page" class="page">
       <div class="panel">
         <div class="panel-title" style="justify-content:space-between">
           <span>📂 Ordens de Serviço</span>
-          <span class="count-chip"><span id="count-visible">0</span> registros</span>
         </div>
-        <div class="search-wrap">
-          <span class="search-icon">🔍</span>
-          <input type="search" id="busca" placeholder="Buscar por nome ou telefone..." oninput="renderLista()" autocomplete="off">
+
+        <!-- Busca inteligente multi-campo -->
+        <div class="smart-search-wrap">
+          <span class="s-icon">🔍</span>
+          <input type="search" id="busca"
+            placeholder="Buscar: nome, telefone, nº OS, endereço, produto, data..."
+            oninput="onBuscaInput()" autocomplete="off">
+          <button class="s-clear" id="busca-clear" onclick="limparBusca()">✕ limpar</button>
         </div>
-        <div class="filter-bar">
-          <button class="filter-chip active" data-status="todos" onclick="filtrarStatus(this)">Todos</button>
-          <button class="filter-chip" data-status="Aberta" onclick="filtrarStatus(this)">🔓 Abertas</button>
-          <button class="filter-chip" data-status="Concluída" onclick="filtrarStatus(this)">✅ Concluídas</button>
-          <button class="filter-chip" data-status="Cancelada" onclick="filtrarStatus(this)">❌ Canceladas</button>
+
+        <!-- Filtros por status, produto e período -->
+        <div class="adv-filters">
+          <select id="filtro-status" onchange="renderLista()">
+            <option value="todos">Todos os status</option>
+            <option value="Aberta">🔓 Abertas</option>
+            <option value="Concluída">✅ Concluídas</option>
+            <option value="Cancelada">❌ Canceladas</option>
+          </select>
+          <select id="filtro-produto" onchange="renderLista()">
+            <option value="todos">Todos produtos</option>
+            <option>Calha</option><option>Calha Galvanizada</option>
+            <option>Rufos</option><option>Rufos Internos</option>
+            <option>Condutores</option><option>Pingadeiras</option>
+            <option>Instalação</option><option>Manutenção</option>
+            <option>Limpeza de Calhas</option><option>Orçamento</option><option>Outro</option>
+          </select>
+          <select id="filtro-periodo" onchange="onFiltroPeriodoChange()">
+            <option value="todos">Qualquer data</option>
+            <option value="hoje">Hoje</option>
+            <option value="semana">Últimos 7 dias</option>
+            <option value="mes">Este mês</option>
+            <option value="data">Data específica ▸</option>
+          </select>
+          <input type="date" id="filtro-data-esp" onchange="renderLista()">
         </div>
+
+        <!-- Tags dos filtros ativos -->
+        <div class="search-tags" id="search-tags"></div>
+
+        <!-- Contador -->
+        <div class="count-row" id="count-row"></div>
+
         <div id="lista-os"></div>
       </div>
     </div>
 
-    <!-- CONFIG -->
-    <div id="page-config" class="page">
-      <div class="panel" style="max-width:480px">
-        <div class="panel-title">⚙️ Configurações</div>
-        <p style="font-size:.8rem;color:var(--grey);margin-bottom:1.35rem">Altere as credenciais de acesso ao sistema.</p>
-        <div class="form-group">
-          <label>Novo Usuário</label>
-          <input type="text" id="cfg-user" placeholder="Digite o novo usuário" autocomplete="username">
+    <!-- RELATÓRIOS PAGE -->
+    <div id="page-relatorios" class="page">
+
+      <!-- Resumo numérico -->
+      <div class="rel-summary" id="rel-resumo"></div>
+
+      <!-- Busca individual tempo real -->
+      <div class="panel">
+        <div class="panel-title">🔍 Buscar &amp; Imprimir OS Individual</div>
+        <p style="font-size:.78rem;color:var(--grey);margin-bottom:.85rem">
+          Digite qualquer coisa — nome, sobrenome, número da OS, telefone, endereço ou data — e as OS aparecem instantaneamente abaixo.
+        </p>
+        <div class="smart-search-wrap" style="margin-bottom:.65rem">
+          <span class="s-icon">🔍</span>
+          <input type="search" id="rel-busca"
+            placeholder="Ex: Ricardo Oliveira, OS-0025, (64) 9..., 15/03..."
+            oninput="renderRelBusca()" autocomplete="off">
+          <button class="s-clear" id="rel-busca-clear" onclick="limparRelBusca()">✕ limpar</button>
         </div>
-        <div class="form-group">
-          <label>Nova Senha</label>
-          <input type="password" id="cfg-pass" placeholder="Digite a nova senha" autocomplete="new-password">
+        <div id="rel-individual-lista"></div>
+      </div>
+
+      <!-- Imprimir lista com filtros -->
+      <div class="panel">
+        <div class="panel-title">📋 Imprimir Lista de OS</div>
+        <p style="font-size:.78rem;color:var(--grey);margin-bottom:.85rem">Selecione os filtros e imprima a lista completa.</p>
+        <div style="display:flex;gap:.6rem;flex-wrap:wrap;align-items:center;margin-bottom:.85rem">
+          <select id="rel-filtro" onchange="renderRelLista()" style="flex:1;min-width:130px;max-width:175px;background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:10px;color:var(--white);font-family:'DM Sans',sans-serif;font-size:.8rem;padding:.5rem .85rem;outline:none;appearance:none;-webkit-appearance:none;min-height:38px">
+            <option value="todos">Todos os status</option>
+            <option value="Aberta">🔓 Abertas</option>
+            <option value="Concluída">✅ Concluídas</option>
+            <option value="Cancelada">❌ Canceladas</option>
+          </select>
+          <select id="rel-periodo" onchange="onRelPeriodoChange()" style="flex:1;min-width:130px;max-width:175px;background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:10px;color:var(--white);font-family:'DM Sans',sans-serif;font-size:.8rem;padding:.5rem .85rem;outline:none;appearance:none;-webkit-appearance:none;min-height:38px">
+            <option value="todos">Qualquer data</option>
+            <option value="hoje">Hoje</option>
+            <option value="semana">Últimos 7 dias</option>
+            <option value="mes">Este mês</option>
+            <option value="data">Data específica ▸</option>
+          </select>
+          <input type="date" id="rel-data-esp" onchange="renderRelLista()" style="display:none;flex:1;min-width:140px;max-width:175px;background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:10px;color:var(--white);font-family:'DM Sans',sans-serif;font-size:.8rem;padding:.5rem .85rem;outline:none;min-height:38px">
+          <button class="btn-print-all" onclick="imprimirLista()">🖨️ Imprimir Lista</button>
         </div>
-        <div class="form-group">
-          <label>Confirmar Senha</label>
-          <input type="password" id="cfg-pass2" placeholder="Confirme a nova senha" autocomplete="new-password">
-        </div>
-        <button class="btn-form-primary" onclick="salvarConfig()">💾 Salvar Credenciais</button>
-        <div class="danger-zone">
-          <p class="danger-title">⚠️ Zona de perigo</p>
-          <button class="btn-form-secondary" style="border-color:rgba(231,76,60,.3);color:#ff7066;width:100%;justify-content:center;text-align:center" onclick="limparTudo()">🗑️ Apagar todas as OS</button>
-        </div>
+        <div id="rel-lista"></div>
       </div>
     </div>
 
   </div><!-- /dash-content -->
 
-  <!-- BOTTOM NAV (mobile) -->
-  <nav class="bottom-nav" id="bottom-nav">
+  <!-- BOTTOM NAV -->
+  <nav class="bottom-nav">
     <div class="bottom-nav-inner">
-      <button class="bnav-btn active" id="bnav-0" onclick="bnavClick('dashboard',0)">
-        <span class="bico">📊</span><span>Início</span>
-      </button>
-      <button class="bnav-btn" id="bnav-2" onclick="bnavClick('lista-os-page',2)">
-        <span class="bico">📂</span><span>Ordens</span>
-        <span class="bnav-badge" id="bnav-count">0</span>
-      </button>
-      <button class="bnav-btn" id="bnav-1" onclick="bnavClick('nova-os',1)">
-        <span class="bnav-fab">➕</span>
-      </button>
-      <button class="bnav-btn" id="bnav-3" onclick="bnavClick('config',3)">
-        <span class="bico">⚙️</span><span>Config</span>
-      </button>
-      <button class="bnav-btn" onclick="fazerLogout()">
-        <span class="bico">🚪</span><span>Sair</span>
-      </button>
+      <button class="bnav-btn active" id="bnav-0" onclick="bnavClick('dashboard',0)"><span class="bico">📊</span><span>Início</span></button>
+      <button class="bnav-btn" id="bnav-2" onclick="bnavClick('lista-os-page',2)"><span class="bico">📂</span><span>Ordens</span><span class="bnav-badge" id="bnav-count">0</span></button>
+      <button class="bnav-btn" id="bnav-1" onclick="bnavClick('nova-os',1)"><span class="bnav-fab">➕</span></button>
+      <button class="bnav-btn" id="bnav-4" onclick="bnavClick('relatorios',4)"><span class="bico">🖨️</span><span>Relatórios</span></button>
+      <button class="bnav-btn" onclick="fazerLogout()"><span class="bico">🚪</span><span>Sair</span></button>
     </div>
   </nav>
-
 </div><!-- /screen-dashboard -->
 
 <!-- MODAL STATUS -->
 <div class="overlay" id="modal-overlay">
   <div class="modal">
     <div class="modal-handle"></div>
-    <div class="modal-hdr">
-      <span class="modal-title">🔄 Alterar Status</span>
-      <button class="btn-close" onclick="fecharModal()">✕</button>
-    </div>
+    <div class="modal-hdr"><span class="modal-title">🔄 Alterar Status</span><button class="btn-close" onclick="fecharModal()">✕</button></div>
     <div id="modal-body"></div>
     <div class="modal-actions">
       <button class="btn-form-secondary" onclick="fecharModal()">Cancelar</button>
@@ -516,11 +495,18 @@ header{position:sticky;top:0;z-index:200;background:rgba(13,27,42,.96);backdrop-
   </div>
 </div>
 
+<div id="print-area"></div>
 <div id="toast"></div>
 
 <script>
+/* ═══ UTILS ═══ */
 const $=id=>document.getElementById(id);
 const hoje=()=>new Date().toISOString().slice(0,10);
+const fmtData=d=>{if(!d)return'';const[y,m,dia]=d.split('-');return`${dia}/${m}/${y}`};
+const esc=s=>String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const agora=()=>new Date().toLocaleString('pt-BR');
+// Normaliza para busca (remove acentos, lowercase)
+const norm=s=>String(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
 
 function toast(msg,tipo='ok'){
   const el=$('toast');
@@ -529,10 +515,22 @@ function toast(msg,tipo='ok'){
   clearTimeout(toast._t);
   toast._t=setTimeout(()=>el.className='',3200);
 }
-function fmt(d){if(!d)return'';const[y,m,dia]=d.split('-');return`${dia}/${m}/${y}`}
-function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
 
-// phone mask
+// Destaca termo buscado preservando HTML safe
+function hl(str,termo){
+  if(!termo||!str)return esc(str);
+  const t=norm(termo),n=norm(str),s=esc(str);
+  if(!n.includes(t))return s;
+  let r='',i=0;
+  while(i<s.length){
+    const sl=norm(s.slice(i,i+t.length));
+    if(sl===t){r+=`<mark>${s.slice(i,i+t.length)}</mark>`;i+=t.length;}
+    else{r+=s[i];i++;}
+  }
+  return r;
+}
+
+// Máscara telefone
 $('f-tel').addEventListener('input',e=>{
   let v=e.target.value.replace(/\D/g,'').slice(0,11);
   if(v.length>=7)v=`(${v.slice(0,2)}) ${v.slice(2,7)}-${v.slice(7)}`;
@@ -540,9 +538,8 @@ $('f-tel').addEventListener('input',e=>{
   e.target.value=v;
 });
 
-// ── AUTH ──
+/* ═══ AUTH ═══ */
 function getCreds(){return JSON.parse(localStorage.getItem('cp_creds')||'{"user":"admin","pass":"calha123"}')}
-
 function fazerLogin(){
   const u=$('login-user').value.trim(),p=$('login-pass').value,c=getCreds();
   if(u===c.user&&p===c.pass){
@@ -565,9 +562,7 @@ function fazerLogout(){
 function toggleSenha(){const i=$('login-pass');i.type=i.type==='password'?'text':'password'}
 ['login-user','login-pass'].forEach(id=>$(id).addEventListener('keydown',e=>{if(e.key==='Enter')fazerLogin()}));
 
-// ── NAV ──
-let filtroAtual='todos';
-
+/* ═══ NAV ═══ */
 function mudarPagina(pid,tabBtn){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
@@ -575,20 +570,15 @@ function mudarPagina(pid,tabBtn){
   if(tabBtn)tabBtn.classList.add('active');
   if(pid==='dashboard')renderDashboard();
   if(pid==='lista-os-page')renderLista();
+  if(pid==='relatorios')renderRelatorio();
 }
-
 function bnavClick(pid,idx){
   mudarPagina(pid,null);
   document.querySelectorAll('.bnav-btn').forEach(b=>b.classList.remove('active'));
   $('bnav-'+idx)&&$('bnav-'+idx).classList.add('active');
 }
 
-function filtrarStatus(btn){
-  document.querySelectorAll('.filter-chip').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');filtroAtual=btn.dataset.status;renderLista();
-}
-
-// ── DATA ──
+/* ═══ DATA ═══ */
 function getOS(){return JSON.parse(localStorage.getItem('cp_os')||'[]')}
 function setOS(d){localStorage.setItem('cp_os',JSON.stringify(d))}
 function gerarID(){
@@ -596,7 +586,7 @@ function gerarID(){
   return'OS-'+String(max+1).padStart(4,'0');
 }
 
-// ── FORM ──
+/* ═══ FORM ═══ */
 function limparForm(){
   ['f-nome','f-tel','f-end','f-desc','f-obs'].forEach(id=>$(id).value='');
   $('f-prod').value='';$('f-status').value='Aberta';$('edit-id').value='';
@@ -606,8 +596,7 @@ function limparForm(){
 }
 function validar(){
   const checks=[[$('f-nome').value.trim(),'Informe o nome do cliente.'],[$('f-tel').value.trim(),'Informe o telefone.'],[$('f-end').value.trim(),'Informe o endereço.'],[$('f-prod').value,'Selecione o produto/serviço.'],[$('f-desc').value.trim(),'Descreva o serviço.']];
-  for(const[v,msg]of checks)if(!v){toast(msg,'err');return false;}
-  return true;
+  for(const[v,msg]of checks)if(!v){toast(msg,'err');return false;}return true;
 }
 function salvarOS(){
   if(!validar())return;
@@ -621,7 +610,6 @@ function salvarOS(){
   if(editId){const idx=lista.findIndex(o=>o.id===editId);if(idx!==-1)lista[idx]=reg;toast('OS atualizada!');}
   else{lista.unshift(reg);toast('Ordem de Serviço criada!');}
   setOS(lista);limparForm();atualizarHeader();
-  // go to list
   mudarPagina('lista-os-page',null);
   document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
   document.querySelectorAll('.tab-btn')[2].classList.add('active');
@@ -631,7 +619,6 @@ function salvarOS(){
 }
 function cancelarEdicao(){limparForm();toast('Edição cancelada.')}
 
-// ── EDITAR ──
 function editarOS(id){
   const os=getOS().find(o=>o.id===id);if(!os)return;
   $('edit-id').value=os.id;$('f-nome').value=os.nome;$('f-tel').value=os.telefone;
@@ -648,13 +635,12 @@ function editarOS(id){
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
-// ── MODAL STATUS ──
+/* ═══ MODAL STATUS ═══ */
 function abrirModalStatus(id){
   const os=getOS().find(o=>o.id===id);if(!os)return;
   $('modal-body').innerHTML=`
     <p style="font-size:.84rem;color:var(--grey);margin-bottom:1.1rem">OS: <strong style="color:var(--white)">${esc(os.id)} — ${esc(os.nome)}</strong></p>
-    <div class="form-group" style="margin-bottom:0">
-      <label>Novo Status</label>
+    <div class="form-group" style="margin-bottom:0"><label>Novo Status</label>
       <select id="modal-status">
         <option value="Aberta" ${os.status==='Aberta'?'selected':''}>🔓 Aberta</option>
         <option value="Concluída" ${os.status==='Concluída'?'selected':''}>✅ Concluída</option>
@@ -673,48 +659,124 @@ function salvarEdicaoModal(){
 function fecharModal(){$('modal-overlay').classList.remove('open')}
 $('modal-overlay').addEventListener('click',e=>{if(e.target===$('modal-overlay'))fecharModal()});
 
-// ── EXCLUIR ──
 function excluirOS(id){
   if(!confirm(`Excluir a ordem ${id}?\nEsta ação não pode ser desfeita.`))return;
   setOS(getOS().filter(o=>o.id!==id));toast('OS excluída.');
   renderLista();renderDashboard();atualizarHeader();
 }
 
-// ── RENDER LISTA ──
+/* ═══════════════════════════════════════
+   FILTRO INTELIGENTE — núcleo compartilhado
+═══════════════════════════════════════ */
+function aplicarFiltros(lista,{busca='',status='todos',produto='todos',periodo='todos',dataEsp=''}={}){
+  const t=norm(busca);
+  if(t){
+    lista=lista.filter(o=>{
+      // busca em todos os campos relevantes, inclusive data formatada
+      return [o.id,o.nome,o.telefone,o.endereco,o.produto,o.descricao,o.obs,
+              fmtData(o.data),fmtData(o.dataCriacao)].some(c=>norm(c).includes(t));
+    });
+  }
+  if(status!=='todos')lista=lista.filter(o=>(o.status||'Aberta')===status);
+  if(produto!=='todos')lista=lista.filter(o=>o.produto===produto);
+  if(periodo==='hoje')lista=lista.filter(o=>o.data===hoje());
+  else if(periodo==='semana'){const d=new Date();d.setDate(d.getDate()-7);lista=lista.filter(o=>o.data>=d.toISOString().slice(0,10));}
+  else if(periodo==='mes'){const m=hoje().slice(0,7);lista=lista.filter(o=>o.data&&o.data.startsWith(m));}
+  else if(periodo==='data'&&dataEsp)lista=lista.filter(o=>o.data===dataEsp);
+  return lista;
+}
+
+/* ═══ PÁGINA ORDENS — filtros ═══ */
+function onBuscaInput(){
+  $('busca-clear').classList.toggle('vis',$('busca').value.length>0);
+  renderLista();
+}
+function limparBusca(){$('busca').value='';$('busca-clear').classList.remove('vis');renderLista();}
+function onFiltroPeriodoChange(){
+  const v=$('filtro-periodo').value;
+  $('filtro-data-esp').classList.toggle('show',v==='data');
+  renderLista();
+}
+
+// Tags dos filtros ativos
+let _tagClearFns=[];
+function renderSearchTags(b,st,pr,per,de){
+  _tagClearFns=[];
+  const tags=[];
+  if(b){tags.push({l:`"${b}"`,fn:()=>{$('busca').value='';$('busca-clear').classList.remove('vis');}});}
+  if(st!=='todos'){tags.push({l:st,fn:()=>{$('filtro-status').value='todos';}});}
+  if(pr!=='todos'){tags.push({l:pr,fn:()=>{$('filtro-produto').value='todos';}});}
+  if(per!=='todos'){
+    const pl={hoje:'Hoje',semana:'Últimos 7 dias',mes:'Este mês',data:de?fmtData(de):'Data'};
+    tags.push({l:pl[per]||per,fn:()=>{$('filtro-periodo').value='todos';$('filtro-data-esp').classList.remove('show');}});
+  }
+  _tagClearFns=tags.map(t=>t.fn);
+  const el=$('search-tags');
+  el.innerHTML=tags.map((t,i)=>`<span class="stag">${esc(t.l)}<button onclick="clearTag(${i})">✕</button></span>`).join('');
+}
+function clearTag(i){if(_tagClearFns[i])_tagClearFns[i]();renderLista();}
+
 function renderLista(){
-  const busca=$('busca').value.toLowerCase().trim();
-  let lista=getOS();
-  if(busca)lista=lista.filter(o=>o.nome.toLowerCase().includes(busca)||o.telefone.includes(busca));
-  if(filtroAtual!=='todos')lista=lista.filter(o=>(o.status||'Aberta')===filtroAtual);
-  $('count-visible').textContent=lista.length;
+  const busca=$('busca').value.trim();
+  const status=$('filtro-status').value;
+  const produto=$('filtro-produto').value;
+  const periodo=$('filtro-periodo').value;
+  const dataEsp=$('filtro-data-esp').value;
+
+  renderSearchTags(busca,status,produto,periodo,dataEsp);
+
+  const lista=aplicarFiltros(getOS(),{busca,status,produto,periodo,dataEsp});
+  const total=getOS().length;
+
+  $('count-row').innerHTML=lista.length===total
+    ?`<span>${total} OS cadastrada${total!==1?'s':''}</span>`
+    :`<span><strong>${lista.length}</strong> encontrada${lista.length!==1?'s':''} de ${total}</span>
+      <button onclick="resetFiltros()" style="background:none;border:none;color:var(--sky);cursor:pointer;font-size:.72rem">Limpar filtros</button>`;
+
   const c=$('lista-os');
-  if(!lista.length){c.innerHTML=`<div class="empty-state"><div class="icon">📂</div><p>${busca?'Nenhuma OS encontrada.':'Nenhuma ordem cadastrada ainda.'}</p></div>`;return;}
+  if(!lista.length){
+    const temFiltro=busca||status!=='todos'||produto!=='todos'||periodo!=='todos';
+    c.innerHTML=`<div class="empty-state"><div class="icon">${temFiltro?'🔍':'📂'}</div>
+      <p>${temFiltro?'Nenhuma OS encontrada. <br><button onclick="resetFiltros()" style="background:none;border:none;color:var(--sky);cursor:pointer;font-size:.82rem;margin-top:.5rem">Limpar todos os filtros</button>':'Nenhuma ordem cadastrada ainda.'}</p></div>`;
+    return;
+  }
+
   const sb=s=>{const m={Aberta:'aberta',Concluída:'concluida',Cancelada:'cancelada'};const i={Aberta:'🔓',Concluída:'✅',Cancelada:'❌'};return`<span class="os-status-badge ${m[s]||'aberta'}">${i[s]||'🔓'} ${esc(s||'Aberta')}</span>`};
+  const H=str=>hl(str,busca);
+
   c.innerHTML=lista.map(os=>`
     <div class="os-card">
       <div>
         <div class="os-header">
-          <span class="os-id">${os.id}</span>
-          <span class="os-name">${esc(os.nome)}</span>
+          <span class="os-id">${H(os.id)}</span>
+          <span class="os-name">${H(os.nome)}</span>
           ${sb(os.status||'Aberta')}
-          <span class="os-date">${fmt(os.data)}</span>
+          <span class="os-date">${fmtData(os.data)}</span>
         </div>
         <div class="os-info">
-          <span>📞 <em>${esc(os.telefone)}</em></span>
-          <span>📍 <em>${esc(os.endereco)}</em></span>
+          <span>📞 <em>${H(os.telefone)}</em></span>
+          <span>📍 <em>${H(os.endereco)}</em></span>
         </div>
-        <span class="os-produto">🔧 ${esc(os.produto)}</span>
-        <div class="os-desc">${esc(os.descricao)}${os.obs?'<br><em style="opacity:.55">Obs: '+esc(os.obs)+'</em>':''}</div>
+        <span class="os-produto">🔧 ${H(os.produto)}</span>
+        <div class="os-desc">${H(os.descricao)}${os.obs?'<br><em style="opacity:.55">Obs: '+H(os.obs)+'</em>':''}</div>
       </div>
       <div class="os-actions">
-        <button class="btn-edit" onclick="editarOS('${os.id}')">✏️ Editar</button>
-        <button class="btn-status" onclick="abrirModalStatus('${os.id}')">🔄 Status</button>
-        <button class="btn-del" onclick="excluirOS('${os.id}')" title="Excluir">🗑️</button>
+        <button class="btn-edit"    onclick="editarOS('${os.id}')">✏️ Editar</button>
+        <button class="btn-status"  onclick="abrirModalStatus('${os.id}')">🔄 Status</button>
+        <button class="btn-print-os" onclick="imprimirUma('${os.id}')" title="Imprimir esta OS">🖨️</button>
+        <button class="btn-del"     onclick="excluirOS('${os.id}')" title="Excluir">🗑️</button>
       </div>
     </div>`).join('');
 }
 
-// ── RENDER DASHBOARD ──
+function resetFiltros(){
+  $('busca').value='';$('busca-clear').classList.remove('vis');
+  $('filtro-status').value='todos';$('filtro-produto').value='todos';
+  $('filtro-periodo').value='todos';$('filtro-data-esp').classList.remove('show');
+  renderLista();
+}
+
+/* ═══ DASHBOARD ═══ */
 function renderDashboard(){
   const lista=getOS();
   const conc=lista.filter(o=>o.status==='Concluída').length;
@@ -723,21 +785,17 @@ function renderDashboard(){
   $('ds-total').textContent=lista.length;$('ds-concluidas').textContent=conc;$('ds-abertas').textContent=aber;$('ds-canceladas').textContent=canc;
   const recentes=lista.slice(0,5);
   const sb=s=>{const m={Aberta:'aberta',Concluída:'concluida',Cancelada:'cancelada'};const i={Aberta:'🔓',Concluída:'✅',Cancelada:'❌'};return`<span class="os-status-badge ${m[s]||'aberta'}" style="font-size:.63rem">${i[s]||'🔓'} ${esc(s||'Aberta')}</span>`};
-  if(!recentes.length){
-    $('os-recentes').innerHTML=`<div class="empty-state" style="padding:1.5rem 0"><div class="icon">📋</div><p>Nenhuma OS ainda. <button onclick="bnavClick('nova-os',1)" style="background:none;border:none;color:var(--sky);cursor:pointer;font-size:.86rem">Criar agora →</button></p></div>`;
-    return;
-  }
+  if(!recentes.length){$('os-recentes').innerHTML=`<div class="empty-state" style="padding:1.5rem 0"><div class="icon">📋</div><p>Nenhuma OS ainda. <button onclick="bnavClick('nova-os',1)" style="background:none;border:none;color:var(--sky);cursor:pointer;font-size:.86rem">Criar agora →</button></p></div>`;return;}
   $('os-recentes').innerHTML=recentes.map(os=>`
     <div style="display:flex;align-items:center;gap:.65rem;padding:.7rem 0;border-bottom:1px solid var(--border);flex-wrap:wrap">
       <span class="os-id" style="flex-shrink:0">${os.id}</span>
       <span style="font-weight:500;font-size:.85rem;flex:1;min-width:90px;word-break:break-word">${esc(os.nome)}</span>
       <span style="font-size:.75rem;color:var(--grey);flex-shrink:0">${esc(os.produto)}</span>
       ${sb(os.status||'Aberta')}
-      <span style="font-size:.7rem;color:var(--grey);flex-shrink:0">${fmt(os.data)}</span>
+      <span style="font-size:.7rem;color:var(--grey);flex-shrink:0">${fmtData(os.data)}</span>
     </div>`).join('')+`<p style="margin-top:.85rem;text-align:right"><button onclick="bnavClick('lista-os-page',2)" style="background:none;border:none;color:var(--sky);cursor:pointer;font-size:.76rem">Ver todas →</button></p>`;
 }
 
-// ── HEADER STATS ──
 function atualizarHeader(){
   const l=getOS();
   $('h-total').textContent=l.length;
@@ -747,23 +805,191 @@ function atualizarHeader(){
   $('bnav-count').textContent=l.length;
 }
 
-// ── CONFIG ──
-function salvarConfig(){
-  const u=$('cfg-user').value.trim(),p=$('cfg-pass').value,p2=$('cfg-pass2').value;
-  if(!u){toast('Informe o novo usuário.','err');return}
-  if(!p){toast('Informe a nova senha.','err');return}
-  if(p!==p2){toast('As senhas não coincidem.','err');return}
-  localStorage.setItem('cp_creds',JSON.stringify({user:u,pass:p}));
-  $('cfg-user').value='';$('cfg-pass').value='';$('cfg-pass2').value='';
-  toast('Credenciais salvas com sucesso!');
-}
-function limparTudo(){
-  if(!confirm('Apagar TODAS as OS?\nAção IRREVERSÍVEL!'))return;
-  if(!confirm('Certeza? Todos os dados serão perdidos!'))return;
-  setOS([]);renderLista();renderDashboard();atualizarHeader();toast('Todas as OS foram removidas.');
+/* ═══════════════════════════════════════
+   RELATÓRIOS
+═══════════════════════════════════════ */
+function renderRelatorio(){
+  const todos=getOS();
+  const conc=todos.filter(o=>o.status==='Concluída').length;
+  const aber=todos.filter(o=>(o.status||'Aberta')==='Aberta').length;
+  const canc=todos.filter(o=>o.status==='Cancelada').length;
+  $('rel-resumo').innerHTML=`
+    <div class="rel-sum-card c-blue"><strong>${todos.length}</strong><span>Total</span></div>
+    <div class="rel-sum-card c-green"><strong>${conc}</strong><span>Concluídas</span></div>
+    <div class="rel-sum-card c-acc"><strong>${aber}</strong><span>Abertas</span></div>
+    <div class="rel-sum-card c-red"><strong>${canc}</strong><span>Canceladas</span></div>`;
+  renderRelBusca();
+  renderRelLista();
 }
 
-// INIT
+// Busca individual em tempo real
+function renderRelBusca(){
+  const busca=$('rel-busca').value.trim();
+  $('rel-busca-clear').classList.toggle('vis',busca.length>0);
+  const cont=$('rel-individual-lista');
+
+  if(!busca){
+    cont.innerHTML=`<div class="empty-state" style="padding:1.75rem 0">
+      <div class="icon">🔍</div>
+      <p>Digite um nome, número da OS, telefone, endereço ou data para encontrar a OS que deseja imprimir.</p>
+    </div>`;
+    return;
+  }
+
+  const lista=aplicarFiltros(getOS(),{busca});
+  if(!lista.length){
+    cont.innerHTML=`<div class="empty-state" style="padding:1.25rem 0">
+      <div class="icon">😕</div>
+      <p>Nenhuma OS encontrada para <strong>"${esc(busca)}"</strong>.</p>
+    </div>`;
+    return;
+  }
+
+  const scl={Aberta:'aberta',Concluída:'concluida',Cancelada:'cancelada'};
+  const ico={Aberta:'🔓',Concluída:'✅',Cancelada:'❌'};
+  const H=str=>hl(str,busca);
+
+  cont.innerHTML=lista.map(os=>`
+    <div class="rel-os-row">
+      <div class="rel-os-info">
+        <div class="rid">${H(os.id)} &nbsp;·&nbsp; ${H(fmtData(os.data))}</div>
+        <div class="rname">${H(os.nome)}</div>
+        <div class="rmeta">
+          <span>📞 ${H(os.telefone)}</span>
+          <span>📍 ${H(os.endereco)}</span>
+          <span>🔧 ${H(os.produto)}</span>
+        </div>
+        ${os.descricao?`<div class="rdesc">${H(os.descricao)}</div>`:''}
+      </div>
+      <div class="rel-os-actions">
+        <span class="os-status-badge ${scl[os.status||'Aberta']||'aberta'}">${ico[os.status||'Aberta']||'🔓'} ${esc(os.status||'Aberta')}</span>
+        <button class="btn-print-one" onclick="imprimirUma('${os.id}')">🖨️ Imprimir</button>
+      </div>
+    </div>`).join('');
+}
+function limparRelBusca(){$('rel-busca').value='';$('rel-busca-clear').classList.remove('vis');renderRelBusca();}
+
+// Lista com filtros
+function onRelPeriodoChange(){
+  const v=$('rel-periodo').value;
+  $('rel-data-esp').style.display=v==='data'?'block':'none';
+  renderRelLista();
+}
+function getRelFiltrada(){
+  const status=$('rel-filtro').value,periodo=$('rel-periodo').value,dataEsp=$('rel-data-esp').value;
+  return aplicarFiltros(getOS(),{status,periodo,dataEsp});
+}
+function renderRelLista(){
+  const lista=getRelFiltrada();
+  const cont=$('rel-lista');
+  if(!lista.length){cont.innerHTML=`<div class="empty-state"><div class="icon">🖨️</div><p>Nenhuma OS com esses filtros.</p></div>`;return;}
+  const scl={Aberta:'aberta',Concluída:'concluida',Cancelada:'cancelada'};
+  const ico={Aberta:'🔓',Concluída:'✅',Cancelada:'❌'};
+  cont.innerHTML=`<p style="font-size:.72rem;color:var(--grey);margin-bottom:.65rem">${lista.length} OS — serão incluídas na impressão</p>`+
+  lista.map(os=>`
+    <div class="rel-os-row">
+      <div class="rel-os-info">
+        <div class="rid">${esc(os.id)} · ${fmtData(os.data)}</div>
+        <div class="rname">${esc(os.nome)}</div>
+        <div class="rmeta"><span>📞 ${esc(os.telefone)}</span><span>📍 ${esc(os.endereco)}</span><span>🔧 ${esc(os.produto)}</span></div>
+      </div>
+      <div class="rel-os-actions">
+        <span class="os-status-badge ${scl[os.status||'Aberta']||'aberta'}">${ico[os.status||'Aberta']||'🔓'} ${esc(os.status||'Aberta')}</span>
+        <button class="btn-print-one" onclick="imprimirUma('${os.id}')">🖨️</button>
+      </div>
+    </div>`).join('');
+}
+
+/* ═══════════════════════════════════════
+   IMPRESSÃO
+═══════════════════════════════════════ */
+function badgeHTML(st){
+  const c={Aberta:'p-aberta',Concluída:'p-concluida',Cancelada:'p-cancelada'};
+  return`<span class="badge-p ${c[st]||'p-aberta'}">${st||'Aberta'}</span>`;
+}
+function prtHeader(sub){
+  return`<div class="prt-header">
+    <div class="prt-logo">CalhaPro<span style="color:#f0a500">.</span><small>Sistema de Ordens de Serviço</small></div>
+    <div class="prt-meta"><strong>${sub}</strong>Emitido em: ${agora()}</div>
+  </div>`;
+}
+function prtFooter(){return`<div class="prt-footer"><span>CalhaPro — Sistema de OS</span><span>Emitido em ${agora()}</span></div>`}
+function prtBar(titulo){
+  return`<div class="prt-close-bar">
+    <span class="prt-close-bar-title">${titulo}</span>
+    <div style="display:flex;gap:.5rem">
+      <button class="btn-cancel-print" onclick="fecharImpressao()">✕ Fechar</button>
+      <button class="btn-do-print" onclick="window.print()">🖨️ Imprimir / PDF</button>
+    </div>
+  </div>`;
+}
+function fecharImpressao(){const p=$('print-area');p.innerHTML='';p.classList.remove('open')}
+
+function imprimirUma(id){
+  const os=getOS().find(o=>o.id===id);
+  if(!os){toast('OS não encontrada.','err');return;}
+  const html=`
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    ${prtBar('Ordem de Serviço — '+os.id)}
+    <div class="prt-wrap" style="max-width:720px">
+      ${prtHeader('Ordem de Serviço')}
+      <div style="font-family:'Syne',sans-serif;font-size:1.05rem;font-weight:800;color:#1b6ca8;margin-bottom:1rem">
+        ${os.id} — ${os.nome} &nbsp; ${badgeHTML(os.status||'Aberta')}
+      </div>
+      <div class="prt-fields">
+        <div class="prt-field"><label>Cliente</label><span>${os.nome}</span></div>
+        <div class="prt-field"><label>Telefone</label><span>${os.telefone}</span></div>
+        <div class="prt-field full"><label>Endereço</label><span>${os.endereco}</span></div>
+        <div class="prt-field"><label>Produto / Serviço</label><span>${os.produto}</span></div>
+        <div class="prt-field"><label>Data de Criação</label><span>${fmtData(os.dataCriacao||os.data)}</span></div>
+        <div class="prt-field"><label>Última Atualização</label><span>${fmtData(os.data)}</span></div>
+        <div class="prt-field"><label>Status</label><span>${os.status||'Aberta'}</span></div>
+        <div class="prt-field full"><label>Descrição do Serviço</label><span style="white-space:pre-wrap">${os.descricao}</span></div>
+        ${os.obs?`<div class="prt-field full"><label>Observações</label><span>${os.obs}</span></div>`:''}
+      </div>
+      <div class="prt-sign">
+        <div class="prt-sign-box">Assinatura do Técnico / Responsável</div>
+        <div class="prt-sign-box">Assinatura do Cliente</div>
+      </div>
+      ${prtFooter()}
+    </div>`;
+  const p=$('print-area');p.innerHTML=html;p.classList.add('open');p.scrollTop=0;
+}
+
+function imprimirLista(){
+  const lista=getRelFiltrada();
+  if(!lista.length){toast('Nenhuma OS para imprimir.','err');return;}
+  const conc=lista.filter(o=>o.status==='Concluída').length;
+  const aber=lista.filter(o=>(o.status||'Aberta')==='Aberta').length;
+  const canc=lista.filter(o=>o.status==='Cancelada').length;
+  const rows=lista.map(os=>`<tr>
+    <td><strong>${os.id}</strong></td><td>${os.nome}</td><td>${os.telefone}</td>
+    <td>${os.endereco}</td><td>${os.produto}</td><td>${fmtData(os.data)}</td>
+    <td>${badgeHTML(os.status||'Aberta')}</td>
+  </tr>`).join('');
+  const html=`
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    ${prtBar('Relatório de OS')}
+    <div class="prt-wrap">
+      ${prtHeader('Relatório de Ordens de Serviço')}
+      <div class="prt-sec-title">📊 Resumo</div>
+      <div class="prt-summary-grid">
+        <div class="prt-sum-box"><strong>${lista.length}</strong><span>Total</span></div>
+        <div class="prt-sum-box"><strong>${conc}</strong><span>Concluídas</span></div>
+        <div class="prt-sum-box"><strong>${aber}</strong><span>Abertas</span></div>
+        <div class="prt-sum-box"><strong>${canc}</strong><span>Canceladas</span></div>
+      </div>
+      <div class="prt-sec-title">📋 Ordens de Serviço</div>
+      <table class="prt-table">
+        <thead><tr><th>ID</th><th>Cliente</th><th>Telefone</th><th>Endereço</th><th>Serviço</th><th>Data</th><th>Status</th></tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+      ${prtFooter()}
+    </div>`;
+  const p=$('print-area');p.innerHTML=html;p.classList.add('open');p.scrollTop=0;
+}
+
+/* ═══ INIT ═══ */
 atualizarHeader();
 </script>
 </body>
